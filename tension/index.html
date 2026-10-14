@@ -319,8 +319,8 @@ h1{font-size:27px;font-weight:800;line-height:1.35;letter-spacing:.5px}
 
    后端脚本：../_后端方案/supabase_setup.sql（在 Supabase 里执行一次）
    ========================================================= */
-var SB_URL = 'https://ytflyofjtsttinucrtfj.supabase.co';
-var SB_KEY = 'sb_publishable_OttYqTcRqXnf-snk20SLpg_fTT2RLxF';
+var SB_URL = 'https://YOUR-PROJECT.supabase.co';
+var SB_KEY = 'YOUR-ANON-KEY';
 var PREFIX = 'XZL';
 
 var MAX_USES  = 3;                       /* 与数据库里的 max_uses 保持一致 */
@@ -360,15 +360,20 @@ function sbRpc(fn, params){
     });
   });
 }
-/* 把用户输入（可能漏横杠/带空格/大小写乱）规范化成 PREFIX-XXXXXX-XXXX */
+/* 把用户输入规范化成 PREFIX-XXXXXX-XXXX
+   容忍：漏横杠、多空格、大小写混乱、中文输入法打出的全角字母数字 */
 function normInput(v){
-  var s = (v || '').toUpperCase().replace(/[^0-9A-Z]/g, '');
+  var s = String(v || '').replace(/[\uFF01-\uFF5E]/g, function(c){
+    return String.fromCharCode(c.charCodeAt(0) - 0xFEE0);   /* 全角 → 半角 */
+  }).replace(/\u3000/g, ' ');
+  s = s.toUpperCase().replace(/[^0-9A-Z]/g, '');
   var p = PREFIX.toUpperCase();
   if (s.indexOf(p) === 0) s = s.slice(p.length);
   if (s.length === 10) return p + '-' + s.slice(0, 6) + '-' + s.slice(6);
   return s;
 }
-function expectedLen(){ return PREFIX.length + 11; }
+/* PREFIX + '-' + 6位随机 + '-' + 4位校验 = PREFIX.length + 12 */
+function expectedLen(){ return PREFIX.length + 12; }
 function toast(msg){
   var t = $('toast'); t.textContent = msg; t.classList.add('on');
   clearTimeout(t._tm); t._tm = setTimeout(function(){ t.classList.remove('on'); }, 1900);
