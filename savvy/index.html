@@ -321,51 +321,132 @@ body[data-theme="savvy"]{--accent:#E8A32B;--accent2:#FFE3A6;--glow:rgba(232,163,
 .ringbox{margin-top:24px}
 .rhero{padding:30px 0 2px}
 
-/* ==================== 朝代气质·专属主题：墨底描金 ==================== */
+/* ==================== 朝代气质 · 国风重制 ==================== */
 body[data-theme="dynasty"]{
-  --accent:#C9A227;
-  --accent2:#F2E0B0;
-  --glow:rgba(201,162,39,.42);
-  --bg1:#07090D;
-  --bg2:#141A26;
-  --txt:#F3EFE6;
-  --dim:#A79E8C;
-  --card:rgba(255,255,255,.05);
-  --line:rgba(201,162,39,.2);
+  --accent:#D4A837;
+  --accent2:#F0D9A0;
+  --glow:rgba(212,168,55,.42);
+  --seal:#B3392E;
+  --bg1:#150F0C;
+  --bg2:#1E1510;
+  --txt:#F5EBD8;
+  --dim:#A89A80;
+  --card:rgba(46,33,16,.42);
+  --line:rgba(212,168,55,.3);
+  font-family:"Songti SC","STSong","Noto Serif CJK SC","Noto Serif SC","SimSun",serif;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect x='26' y='26' width='8' height='8' transform='rotate(45 30 30)' fill='none' stroke='%23D4A837' stroke-opacity='0.05'/%3E%3C/svg%3E") 0 0/60px 60px,
+    radial-gradient(120% 70% at 50% -8%, #3A2A12 0%, rgba(58,42,18,0) 56%),
+    radial-gradient(72% 46% at 88% 4%, rgba(179,57,46,.18), transparent 62%),
+    linear-gradient(180deg, #150F0C 0%, #1E1510 48%, #120D0A 100%);
+  background-attachment:fixed;
 }
-body[data-theme="dynasty"]::before{background:radial-gradient(circle,rgba(192,57,43,.44),transparent 68%)}
-body[data-theme="dynasty"]::after{background:radial-gradient(circle,rgba(201,162,39,.36),transparent 68%)}
+body[data-theme="dynasty"]::before{
+  background:radial-gradient(circle,rgba(179,57,46,.5),transparent 68%)}
+body[data-theme="dynasty"]::after{
+  background:radial-gradient(circle,rgba(212,168,55,.4),transparent 68%)}
 
-/* 描金细边卡片 */
+/* 品牌：朱砂印章 + 楷体金题 */
+body[data-theme="dynasty"] .brand{
+  font-family:"STKaiti","KaiTi","Kaiti SC","Noto Serif SC",serif;
+  letter-spacing:6px;color:var(--accent2);font-size:15px;font-weight:600;
+}
+body[data-theme="dynasty"] .brand i{display:none}
+body[data-theme="dynasty"] .brand::before{
+  content:"测";
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;
+  background:linear-gradient(135deg,#C63B2C,#8E271E);
+  color:#F7E3A8;
+  font-family:"STKaiti","KaiTi",serif;font-size:21px;font-weight:700;line-height:1;
+  border-radius:6px;letter-spacing:0;
+  box-shadow:0 2px 8px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.18),
+             inset 0 -1px 0 rgba(0,0,0,.25);
+  margin-right:12px;
+}
+
+/* 开场主标题：楷体 */
+body[data-theme="dynasty"] .gate-hero h1{
+  font-family:"STKaiti","KaiTi","Kaiti SC","Noto Serif SC",serif;
+  font-weight:700;letter-spacing:2px;line-height:1.6;
+}
+
+/* 卡片：描金双线 + 暖绢底 */
 body[data-theme="dynasty"] .card,
 body[data-theme="dynasty"] .panel,
 body[data-theme="dynasty"] .qcard,
 body[data-theme="dynasty"] .tcard{
-  border-color:rgba(201,162,39,.3);
-  box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(242,224,176,.14),
-             inset 0 0 0 1px rgba(201,162,39,.07);
+  border:1px solid rgba(212,168,55,.42);
+  background:linear-gradient(180deg, rgba(48,35,17,.5), rgba(26,20,12,.72));
+  box-shadow:0 24px 60px rgba(0,0,0,.5),
+             inset 0 0 0 1px rgba(212,168,55,.09),
+             inset 0 1px 0 rgba(240,217,160,.12);
 }
-/* 题卡顶部一道金线 */
+/* 题卡顶部金线（双线 + 中央菱形） */
 body[data-theme="dynasty"] .qcard{position:relative}
-body[data-theme="dynasty"] .qcard::before{content:"";position:absolute;left:22px;right:22px;top:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.75}
-
-/* 小标题前的金色竖标 */
-body[data-theme="dynasty"] .sec h3::before{content:"";display:inline-block;width:3px;height:13px;
-  background:linear-gradient(180deg,var(--accent2),var(--accent));
-  margin-right:9px;vertical-align:-1px;border-radius:2px}
-/* 引用块左侧金线 */
-body[data-theme="dynasty"] .quote{border-left:2px solid var(--accent);padding-left:16px}
-/* 金石气：名字拉开字距 */
-body[data-theme="dynasty"] .rhero .nm{letter-spacing:3px}
-body[data-theme="dynasty"] .brand{letter-spacing:7px;color:var(--accent2)}
-body[data-theme="dynasty"] .proof{border-color:rgba(201,162,39,.3)}
-/* 主按钮：描金 */
-body[data-theme="dynasty"] .btn:not(.ghost){
-  background:linear-gradient(135deg,#E7C877,#B8860B);
-  box-shadow:0 8px 26px rgba(201,162,39,.34);
-  color:#2A1F05;
+body[data-theme="dynasty"] .qcard::before{
+  content:"";position:absolute;left:18px;right:18px;top:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent) 18%,var(--accent) 82%,transparent);
+  opacity:.8;
 }
+
+/* 小标题：朱砂菱形 + 楷体 */
+body[data-theme="dynasty"] .sec h3{
+  font-family:"STKaiti","KaiTi","Kaiti SC","Noto Serif SC",serif;
+  letter-spacing:2px;font-weight:700;
+}
+body[data-theme="dynasty"] .sec h3::before{
+  content:"";display:inline-block;width:8px;height:8px;background:var(--seal);
+  transform:rotate(45deg);margin-right:11px;vertical-align:1px;
+  box-shadow:0 0 0 1px rgba(212,168,55,.45);
+}
+
+/* 金句：卷轴居中，楷体 */
+body[data-theme="dynasty"] .quote{
+  border-left:none;
+  border:1px solid rgba(212,168,55,.3);
+  background:linear-gradient(180deg, rgba(48,35,17,.42), rgba(26,20,12,.55));
+  text-align:center;padding:20px 22px;
+  font-family:"STKaiti","KaiTi","Kaiti SC","Noto Serif SC",serif;
+  letter-spacing:1.5px;font-size:16px;
+}
+
+/* 结果类型名：金箔渐变楷体 */
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  body[data-theme="dynasty"] .rhero .nm{
+    background:linear-gradient(180deg,#FAE9B0 0%,#EBC86F 38%,#C89A34 72%,#F0D48A 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+}
+body[data-theme="dynasty"] .rhero .nm{
+  font-family:"STKaiti","KaiTi","Kaiti SC","Noto Serif SC",serif;
+  font-size:36px;font-weight:700;letter-spacing:5px;line-height:1.3;
+  filter:drop-shadow(0 2px 14px rgba(212,168,55,.4));
+}
+
+/* 选项：宋体，选中金框 */
+body[data-theme="dynasty"] .opt{font-family:"Songti SC","Noto Serif SC",serif}
+body[data-theme="dynasty"] .opt.on{
+  border-color:var(--accent);
+  background:linear-gradient(180deg, rgba(212,168,55,.16), rgba(212,168,55,.05));
+  box-shadow:0 0 0 1px var(--accent), 0 10px 26px rgba(212,168,55,.2);
+}
+
+/* 实时人数徽章 */
+body[data-theme="dynasty"] .proof{border-color:rgba(212,168,55,.34);font-family:"Songti SC",serif}
+
+/* 主按钮：描金 + 内高光 */
+body[data-theme="dynasty"] .btn:not(.ghost){
+  background:linear-gradient(135deg,#F2D078 0%,#D6A93A 55%,#B8860B 100%);
+  color:#3A2606;
+  font-family:"STKaiti","KaiTi",serif;font-weight:700;letter-spacing:3px;
+  box-shadow:0 8px 26px rgba(212,168,55,.36), inset 0 1px 0 rgba(255,255,255,.42);
+}
+body[data-theme="dynasty"] .btn.ghost{border-color:rgba(212,168,55,.4);color:var(--accent2);font-family:"STKaiti","KaiTi",serif}
+
+/* 分数环颜色 */
+body[data-theme="dynasty"] .ring .num b,
+body[data-theme="dynasty"] .ringinfo .t2 b{color:var(--accent2)}
 </style>
 </head>
 <body data-theme="savvy">
