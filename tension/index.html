@@ -447,6 +447,17 @@ body[data-theme="dynasty"] .btn.ghost{border-color:rgba(212,168,55,.4);color:var
 /* 分数环颜色 */
 body[data-theme="dynasty"] .ring .num b,
 body[data-theme="dynasty"] .ringinfo .t2 b{color:var(--accent2)}
+
+/* 卷轴展开动效：题卡从顶部缓缓展开 */
+@keyframes dynUnroll{from{opacity:0;transform:scaleY(.5) translateY(-16px)}to{opacity:1;transform:none}}
+body[data-theme="dynasty"] .qcard{transform-origin:top center;animation:dynUnroll .4s cubic-bezier(.22,.85,.28,1)}
+
+/* 装裱画框：内容列外一圈淡金细线 */
+body[data-theme="dynasty"] .wrap{position:relative;z-index:1}
+body[data-theme="dynasty"] .wrap::before{
+  content:"";position:absolute;inset:-14px;border:1px solid rgba(212,168,55,.15);
+  border-radius:8px;pointer-events:none;z-index:-1;
+}
 </style>
 </head>
 <body data-theme="tension">
@@ -1332,7 +1343,9 @@ function buildCardData(){
     emoji:T.e, name:T.name, tag:T.tag,
     scoreLabel:t.scoreLabel, score:r.score, beat:r.beat, sample:t.sample,
     dims:dims, secs:secs, quote:T.sec3, footer:t.footer,
-    subtitle:'四维人格测评 · 结果仅供娱乐与自我观察'
+    subtitle:'四维人格测评 · 结果仅供娱乐与自我观察',
+    seal:(t.theme === 'dynasty') ? T.name.charAt(0) : null,
+    sealColor:'#B3392E'
   };
 }
 function drawCard(ctx, d, dry){
@@ -1441,6 +1454,23 @@ function drawCard(ctx, d, dry){
   ctx.font = '21px ' + FONT; ctx.fillStyle = 'rgba(255,255,255,.4)';
   if (!dry) ctx.fillText(d.subtitle, W / 2, y);
   y += 66;
+
+  /* 朱砂印章（朝代站专属） */
+  if (d.seal){
+    var ss = 88, sx = W - pad - ss, sy = y - 62;
+    if (!dry){
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,.45)'; ctx.shadowBlur = 12; ctx.shadowOffsetY = 4;
+      ctx.fillStyle = d.sealColor || '#B3392E';
+      rr(ctx, sx, sy, ss, ss, 12); ctx.fill();
+      ctx.restore();
+      ctx.fillStyle = 'rgba(248,231,176,.94)';
+      ctx.font = 'bold 48px STKaiti,KaiTi,serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(d.seal, sx + ss / 2, sy + ss / 2 + 16);
+    }
+    y += 30;
+  }
 
   return y;
 }
