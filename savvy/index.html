@@ -276,6 +276,50 @@ body[data-theme="savvy"]::after{background:radial-gradient(circle,rgba(80,175,19
 .gbtn .e{font-size:52px;filter:drop-shadow(0 6px 18px var(--glow))}
 .gbtn .n{font-size:17px;letter-spacing:6px;margin-top:12px;padding-left:6px}
 .gbtn.on{background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.04))}
+
+/* ==================== 视觉升级 v3：钩子 + 仪式感 ==================== */
+/* 撞色更亮，第一眼更有电 */
+body[data-theme="tension"]{--accent:#FF3568;--accent2:#FFC0D3;--glow:rgba(255,53,104,.46)}
+body[data-theme="savvy"]{--accent:#E8A32B;--accent2:#FFE3A6;--glow:rgba(232,163,43,.42)}
+
+/* 开场页：发光徽章 + 扩散光环 + 两侧光球 */
+.gate-hero{padding:34px 0 12px}
+.emblem{position:relative;width:136px;height:136px;margin:0 auto;display:flex;align-items:center;justify-content:center}
+.emblem .logo{font-size:60px;position:relative;z-index:2;line-height:1;
+  filter:drop-shadow(0 0 28px var(--glow));animation:floaty 3.4s ease-in-out infinite}
+.emblem .ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--accent);
+  opacity:.5;animation:ripple 3.4s ease-out infinite;pointer-events:none}
+.emblem .ring.r2{animation-delay:1.7s}
+@keyframes ripple{0%{transform:scale(.66);opacity:.6}65%{opacity:.08}100%{transform:scale(1.08);opacity:0}}
+.emblem .orb{position:absolute;border-radius:50%;filter:blur(20px);pointer-events:none}
+.emblem .orb.a{width:68px;height:68px;background:var(--accent);left:-36px;top:4px;opacity:.55;
+  animation:floaty 4.6s ease-in-out infinite}
+.emblem .orb.b{width:54px;height:54px;background:var(--accent2);right:-30px;bottom:-2px;opacity:.42;
+  animation:floaty 5.6s ease-in-out infinite reverse}
+.gate-hero h1{font-size:28px;line-height:1.5;letter-spacing:.6px;margin-top:22px}
+.gate-hero .sub{margin-top:13px;font-size:13.5px}
+
+/* "正在有人测" 的实时感 */
+.proof{display:inline-flex;align-items:center;gap:8px;margin-top:17px;padding:7px 15px;border-radius:22px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);
+  font-size:12px;color:var(--txt);letter-spacing:.3px}
+.proof .dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;
+  box-shadow:0 0 8px #4ADE80;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* 题目切换：从右侧滑入 */
+@keyframes qin{from{opacity:0;transform:translateX(18px) scale(.99)}to{opacity:1;transform:none}}
+.qcard{animation:qin .3s cubic-bezier(.2,.85,.25,1)}
+.opt{border-radius:16px}
+.opt.on{background:rgba(255,255,255,.13)}
+
+/* 结果页揭晓：区块依次浮现 + 分数环填满 */
+#scrResult .ringbox,#scrResult .dims,#scrResult .sec,#scrResult .quote,
+#scrResult .tips,#scrResult .share,#scrResult .row2,#scrResult .rfoot{
+  animation:fadeUp .62s cubic-bezier(.2,.85,.25,1) both}
+.ring circle.rg{transition:stroke-dashoffset 1.25s cubic-bezier(.25,.9,.3,1)}
+.ringbox{margin-top:24px}
+.rhero{padding:30px 0 2px}
 </style>
 </head>
 <body data-theme="savvy">
@@ -285,9 +329,14 @@ body[data-theme="savvy"]::after{background:radial-gradient(circle,rgba(80,175,19
   <div id="scrGate">
     <div class="brand"><i></i>测 测 研 究 所<i></i></div>
     <div class="gate-hero">
-      <div class="logo">👑</div>
-      <h1>你的人情世故<br>到第几段位</h1>
-      <p class="sub">输入你的专属密码，解锁段位测评<br><b>20 题</b> · 约 4 分钟 · 四维测评</p>
+      <div class="emblem">
+        <span class="orb a"></span><span class="orb b"></span>
+        <span class="ring"></span><span class="ring r2"></span>
+        <div class="logo">👑</div>
+      </div>
+      <h1>为什么真心实意的人<br>总是先得罪人</h1>
+      <p class="sub">20 道题，测出你的人情段位<br>8 个段位 · 从青铜到王者</p>
+      <div class="proof"><span class="dot"></span><span id="proofTxt">已有 9,265 人在测</span></div>
     </div>
 
     <div class="lockbox panel">
@@ -947,9 +996,23 @@ function finish(){
   renderResult();
   show('scrResult');
   setTimeout(function(){
+    /* 维度条涨上去 */
     document.querySelectorAll('#scrResult .dt i').forEach(function(el){
       el.style.width = el.getAttribute('data-w') + '%';
     });
+    /* 分数环从 0 填满 */
+    var rg = document.querySelector('#scrResult .ring circle.rg');
+    if (rg && rg.getAttribute('data-off')){
+      rg.style.strokeDashoffset = rg.getAttribute('data-off');
+    }
+    /* 区块依次浮现，做出"揭晓"的仪式感 */
+    var blocks = document.querySelectorAll(
+      '#scrResult .ringbox, #scrResult .dims, #scrResult .sec, ' +
+      '#scrResult .quote, #scrResult .tips, #scrResult .share, ' +
+      '#scrResult .row2, #scrResult .rfoot');
+    for (var bi = 0; bi < blocks.length; bi++){
+      blocks[bi].style.animationDelay = (0.05 + bi * 0.07).toFixed(2) + 's';
+    }
   }, 60);
 
   /* 在线模式：向服务端扣 1 次 */
@@ -992,9 +1055,9 @@ function renderResult(){
           '<stop offset="100%" style="stop-color:var(--accent2)"/>' +
         '</linearGradient></defs>' +
         '<circle cx="46" cy="46" r="40" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="7"/>' +
-        '<circle cx="46" cy="46" r="40" fill="none" stroke="url(#rg)" stroke-width="7" ' +
+        '<circle class="rg" cx="46" cy="46" r="40" fill="none" stroke="url(#rg)" stroke-width="7" ' +
           'stroke-linecap="round" stroke-dasharray="' + CIRC.toFixed(1) + '" ' +
-          'stroke-dashoffset="' + OFF.toFixed(1) + '"/>' +
+          'stroke-dashoffset="' + CIRC.toFixed(1) + '" data-off="' + OFF.toFixed(1) + '"/>' +
       '</svg><div class="num"><b>' + r.score + '</b><i>' + t.scoreUnit + '</i></div></div>' +
       '<div class="ringinfo"><div class="t1">' + t.scoreLabel + '</div>' +
       '<div class="t2">超过了 <b>' + r.beat + '%</b> 的参与者<br>参考样本 ' + t.sample + ' 人</div></div>' +
