@@ -335,6 +335,7 @@ body[data-theme="dynasty"]{
   --line:rgba(212,168,55,.3);
   font-family:"Songti SC","STSong","Noto Serif CJK SC","Noto Serif SC","SimSun",serif;
   background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 220' preserveAspectRatio='none'%3E%3Ccircle cx='972' cy='74' r='46' fill='%23D4A837' opacity='0.09'/%3E%3Cpath fill='%230C0806' opacity='0.5' d='M0 220L0 154L140 96L300 142L430 86L600 152L760 96L920 152L1080 102L1200 146L1200 220Z'/%3E%3Cpath fill='%230C0806' opacity='0.4' d='M0 220L0 178L250 134L470 170L680 132L900 170L1080 140L1200 172L1200 220Z'/%3E%3C/svg%3E") bottom center/100% 220px no-repeat,
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect x='26' y='26' width='8' height='8' transform='rotate(45 30 30)' fill='none' stroke='%23D4A837' stroke-opacity='0.05'/%3E%3C/svg%3E") 0 0/60px 60px,
     radial-gradient(120% 70% at 50% -8%, #3A2A12 0%, rgba(58,42,18,0) 56%),
     radial-gradient(72% 46% at 88% 4%, rgba(179,57,46,.18), transparent 62%),
@@ -458,6 +459,38 @@ body[data-theme="dynasty"] .wrap::before{
   content:"";position:absolute;inset:-14px;border:1px solid rgba(212,168,55,.15);
   border-radius:8px;pointer-events:none;z-index:-1;
 }
+
+/* 竖排诗句：结果页右缘 */
+body[data-theme="dynasty"] .rhero{position:relative}
+body[data-theme="dynasty"] .rhero::after{
+  content:"气度千年";
+  position:absolute;right:2px;top:6px;
+  writing-mode:vertical-rl;
+  font-family:"STKaiti","KaiTi","Kaiti SC",serif;
+  font-size:13px;letter-spacing:8px;
+  color:rgba(212,168,55,.34);
+  pointer-events:none;
+}
+/* 结果页类型印章（替代 emoji） */
+body[data-theme="dynasty"] .rhero .sealbig{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:64px;height:64px;
+  background:linear-gradient(135deg,#C63B2C,#8E271E);
+  color:#F7E3A8;font-family:"STKaiti","KaiTi",serif;
+  font-size:36px;font-weight:700;line-height:1;
+  border-radius:9px;
+  box-shadow:0 4px 16px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.2);
+  margin:4px auto 2px;
+}
+/* 结果页右下角品牌印 */
+body[data-theme="dynasty"] .sealmark{
+  width:48px;height:48px;margin:16px 0 0 auto;
+  background:linear-gradient(135deg,#C63B2C,#8E271E);
+  color:#F7E3A8;font-family:"STKaiti","KaiTi",serif;
+  font-size:28px;font-weight:700;line-height:48px;text-align:center;
+  border-radius:6px;
+  box-shadow:0 3px 12px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.18);
+}
 </style>
 </head>
 <body data-theme="dynasty">
@@ -474,7 +507,6 @@ body[data-theme="dynasty"] .wrap::before{
       </div>
       <h1>如果生在一千年前<br>你会是哪个朝代的人</h1>
       <p class="sub">20 道题，测出你身上那口气<br>12 种朝代人格 · 从汉到清</p>
-      <div class="proof"><span class="dot"></span><span id="proofTxt">已有 23,517 人在测</span></div>
     </div>
 
     <div class="lockbox panel">
@@ -1203,7 +1235,9 @@ function renderResult(){
   var tb = r.dimPct[r.strong], wb = r.dimPct[r.weak];
   var html = '';
   html += '<div class="brand"><i></i>' + t.short + '<i></i></div>';
-  html += '<div class="rhero"><span class="e">' + T.e + '</span><div class="nm">' + T.name + '</div><div class="tg">' + T.tag + '</div></div>';
+  var heroE = (t.theme === 'dynasty') ? '<span class="sealbig">' + T.name.charAt(0) + '</span>'
+                                      : '<span class="e">' + T.e + '</span>';
+  html += '<div class="rhero">' + heroE + '<div class="nm">' + T.name + '</div><div class="tg">' + T.tag + '</div></div>';
   var CIRC = 2 * Math.PI * 40;
   var OFF  = CIRC * (1 - Math.max(0, Math.min(100, r.score)) / 100);
   html += '<div class="ringbox">' +
@@ -1238,6 +1272,9 @@ function renderResult(){
   html += '<div class="row2"><button class="btn small" onclick="copyShare()">📋 复制结果</button><button class="btn small" onclick="genCard()">🖼 生成图片</button></div>';
   html += '<div class="row2"><button class="btn ghost small" onclick="again()">🔄 再测一次</button><button class="btn ghost small" onclick="showSelect()">🏠 返回首页</button></div>';
   html += '<div class="rfoot">本次结果基于 ' + r.n + ' 道题目的维度计分生成，仅供娱乐与自我观察<br><span id="leftTip">密码剩余次数：' + left + ' 次</span></div>';
+  if (t.theme === 'dynasty'){
+    html += '<div class="sealmark">测</div>';
+  }
 
   $('scrResult').innerHTML = html;
 }
@@ -1320,6 +1357,7 @@ function buildCardData(){
     dims:dims, secs:secs, quote:T.sec3, footer:t.footer,
     subtitle:'四维人格测评 · 结果仅供娱乐与自我观察',
     seal:(t.theme === 'dynasty') ? T.name.charAt(0) : null,
+    brandSeal:(t.theme === 'dynasty') ? '测' : null,
     sealColor:'#B3392E'
   };
 }
@@ -1348,7 +1386,22 @@ function drawCard(ctx, d, dry){
   ctx.font = 'bold 40px ' + FONT; ctx.fillStyle = 'rgba(255,255,255,.92)';
   ctx.fillText(d.title, W / 2, y); y += 60;
 
-  ctx.font = eFont; y += 96; ctx.fillText(d.emoji, W / 2, y); y += 30;
+  ctx.font = eFont; y += 96;
+  if (d.seal){
+    var hs = 92, hx = W / 2 - hs / 2, hy = y - 26;
+    ctx.save();
+    ctx.shadowColor = 'rgba(0,0,0,.42)'; ctx.shadowBlur = 10; ctx.shadowOffsetY = 3;
+    ctx.fillStyle = d.sealColor || '#B3392E';
+    rr(ctx, hx, hy, hs, hs, 14); ctx.fill();
+    ctx.restore();
+    ctx.fillStyle = 'rgba(248,231,176,.95)';
+    ctx.font = 'bold 50px STKaiti,KaiTi,serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(d.seal, W / 2, hy + hs / 2 + 17);
+    y += hs + 4;
+  } else {
+    ctx.fillText(d.emoji, W / 2, y); y += 30;
+  }
   ctx.font = nFont; ctx.fillStyle = '#fff'; y += 44; ctx.fillText(d.name, W / 2, y); y += 52;
   ctx.font = tFont; ctx.fillStyle = d.accent2;
   var tagLines = wrapLines(ctx, d.tag, maxW - 40, tFont);
@@ -1430,8 +1483,8 @@ function drawCard(ctx, d, dry){
   if (!dry) ctx.fillText(d.subtitle, W / 2, y);
   y += 66;
 
-  /* 朱砂印章（朝代站专属） */
-  if (d.seal){
+  /* 朱砂品牌印（朝代站专属，右下角） */
+  if (d.brandSeal){
     var ss = 88, sx = W - pad - ss, sy = y - 62;
     if (!dry){
       ctx.save();
@@ -1442,7 +1495,7 @@ function drawCard(ctx, d, dry){
       ctx.fillStyle = 'rgba(248,231,176,.94)';
       ctx.font = 'bold 48px STKaiti,KaiTi,serif';
       ctx.textAlign = 'center';
-      ctx.fillText(d.seal, sx + ss / 2, sy + ss / 2 + 16);
+      ctx.fillText(d.brandSeal, sx + ss / 2, sy + ss / 2 + 16);
     }
     y += 30;
   }
