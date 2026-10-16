@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0B0910">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<title>你的朝代气质是什么 · 测测研究所</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --accent:#E4577C;
+  --accent2:#FF9DB6;
+  --glow:rgba(228,87,124,.35);
+  --bg1:#0C0810;
+  --bg2:#1B1020;
+  --txt:#F5EFF4;
+  --dim:#A99CB0;
+  --card:rgba(255,255,255,.055);
+  --line:rgba(255,255,255,.11);
+}
+body[data-theme="savvy"]{
+  --accent:#D8A445;
+  --accent2:#F5DC9C;
+  --glow:rgba(216,164,69,.32);
+  --bg1:#080D12;
+  --bg2:#122029;
+}
+html,body{min-height:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  background:radial-gradient(120% 60% at 50% -10%, var(--bg2) 0%, var(--bg1) 60%),var(--bg1);
+  background-attachment:fixed;
+  color:var(--txt);
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:env(safe-area-inset-bottom);
+  overflow-x:hidden;
+}
+.wrap{max-width:520px;margin:0 auto;padding:0 18px 46px;position:relative}
+.hide{display:none!important}
+
+/* ============ 通用 ============ */
+.brand{display:flex;align-items:center;gap:8px;justify-content:center;padding:22px 0 6px;font-size:12px;letter-spacing:3px;color:var(--dim);font-weight:600}
+.brand i{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block}
+h1{font-size:27px;font-weight:800;line-height:1.35;letter-spacing:.5px}
+.sub{font-size:14px;line-height:1.75;color:var(--dim);margin-top:10px}
+.btn{display:block;width:100%;padding:16px;border:none;border-radius:15px;font-size:16.5px;font-weight:700;
+  font-family:inherit;cursor:pointer;color:#fff;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  box-shadow:0 8px 24px var(--glow);transition:transform .14s ease,opacity .2s;letter-spacing:.5px}
+.btn:active{transform:scale(.965)}
+.btn.ghost{background:transparent;color:var(--txt);border:1.5px solid var(--line);box-shadow:none;font-weight:600}
+.btn.line{background:linear-gradient(135deg,var(--accent2),var(--accent));opacity:.95}
+.btn[disabled]{opacity:.4;pointer-events:none}
+.row2{display:flex;gap:10px;margin-top:12px}
+.row2 .btn{flex:1;padding:14px 8px;font-size:14.5px}
+.hint{text-align:center;font-size:11.5px;color:var(--dim);line-height:1.8;margin-top:16px;opacity:.75}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 18px;backdrop-filter:blur(6px)}
+
+/* ============ 门禁 ============ */
+.gate-hero{text-align:center;padding:34px 0 10px}
+.gate-hero .logo{font-size:64px;line-height:1;animation:floaty 3s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.gate-hero h1{margin-top:16px;font-size:30px}
+.gate-hero .sub{margin-top:12px}
+.lockbox{margin-top:24px}
+.field{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.3);border:1.5px solid var(--line);
+  border-radius:15px;padding:0 14px;transition:border-color .2s}
+.field:focus-within{border-color:var(--accent)}
+.field input{flex:1;background:transparent;border:none;outline:none;color:var(--txt);font-size:17px;
+  font-family:inherit;padding:17px 0;letter-spacing:2px;font-weight:600}
+.field input::placeholder{color:#6E6276;letter-spacing:1px;font-weight:400;font-size:15px}
+.field .eye{font-size:19px;opacity:.6;cursor:pointer;padding:6px}
+.err{font-size:13px;color:#FF8593;margin-top:10px;text-align:center;min-height:18px;line-height:1.5}
+.quota{margin-top:14px;text-align:center;font-size:12.5px;color:var(--dim)}
+.quota b{color:var(--accent2);font-size:15px}
+.peek{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.peek .pk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 10px;text-align:center;opacity:.85}
+.peek .pk .e{font-size:30px}
+.peek .pk .n{font-size:12.5px;margin-top:7px;font-weight:600}
+.peek .pk .d{font-size:10.5px;color:var(--dim);margin-top:4px;line-height:1.5}
+
+/* ============ 选择页 ============ */
+.tcard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 20px;margin-bottom:14px;
+  cursor:pointer;transition:transform .15s,border-color .2s;position:relative;overflow:hidden}
+.tcard:active{transform:scale(.978)}
+.tcard .glowdot{position:absolute;right:-40px;top:-40px;width:130px;height:130px;border-radius:50%;filter:blur(44px);opacity:.5}
+.tcard .hd{display:flex;align-items:center;gap:12px}
+.tcard .hd .e{font-size:36px}
+.tcard .hd .tt{font-size:18.5px;font-weight:800}
+.tcard .hd .st{font-size:11.5px;color:var(--dim);margin-top:5px}
+.tcard .dd{font-size:13.5px;line-height:1.75;color:var(--dim);margin-top:13px}
+.tcard .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.tcard .tags span{font-size:11px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.07);color:var(--dim)}
+.tcard .go{margin-top:15px;font-size:13.5px;font-weight:700;color:var(--accent2);display:flex;align-items:center;gap:5px}
+.credit{margin-top:16px;font-size:11px;color:var(--dim);line-height:1.85;opacity:.78}
+
+/* ============ 性别 ============ */
+.gwrap{text-align:center;padding:26px 0}
+.gwrap .big{font-size:56px;animation:floaty 3s ease-in-out infinite}
+.gwrap h1{margin-top:14px}
+.ggrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.gbtn{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:26px 10px;cursor:pointer;
+  transition:all .18s;font-family:inherit;color:var(--txt)}
+.gbtn:active{transform:scale(.96)}
+.gbtn.on{border-color:var(--accent);background:rgba(255,255,255,.1);box-shadow:0 8px 26px var(--glow)}
+.gbtn .e{font-size:44px;display:block}
+.gbtn .n{font-size:16px;font-weight:800;margin-top:10px;letter-spacing:2px}
+.gbtn .d{font-size:11.5px;color:var(--dim);margin-top:6px;line-height:1.5}
+
+/* ============ 答题 ============ */
+.qtop{display:flex;align-items:center;gap:12px;padding:18px 0 4px}
+.qtop .back{font-size:13px;color:var(--dim);cursor:pointer;padding:8px 4px;white-space:nowrap;font-weight:600}
+.qtop .cnt{flex:1;text-align:center;font-size:13.5px;font-weight:700;color:var(--txt);letter-spacing:.5px}
+.qtop .cnt i{color:var(--accent2);font-style:normal;font-size:16px}
+.bar{height:5px;background:rgba(255,255,255,.09);border-radius:4px;overflow:hidden;margin:12px 0 18px}
+.bar .fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transition:width .35s cubic-bezier(.4,0,.2,1)}
+.qcard{background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));
+  border:1px solid var(--line);border-radius:24px;padding:26px 20px;animation:fadeUp .35s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.qcard .q{font-size:18.5px;font-weight:700;line-height:1.62;margin-bottom:20px}
+.qcard .q .idx{color:var(--accent2);font-size:13px;font-weight:800;display:block;margin-bottom:8px;letter-spacing:1.5px}
+.opt{display:flex;align-items:flex-start;gap:11px;width:100%;text-align:left;padding:15px 15px;margin-bottom:10px;
+  background:rgba(0,0,0,.22);border:2px solid rgba(255,255,255,.08);border-radius:15px;font-size:15px;line-height:1.55;
+  color:var(--txt);font-family:inherit;cursor:pointer;transition:all .15s}
+.opt:last-child{margin-bottom:0}
+.opt:active{transform:scale(.985)}
+.opt .lt{width:22px;height:22px;border-radius:50%;border:1.8px solid rgba(255,255,255,.25);flex:0 0 22px;
+  display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:800;margin-top:1px;color:var(--dim)}
+.opt .tx{flex:1}
+.opt.on{border-color:var(--accent);background:rgba(255,255,255,.1)}
+.opt.on .lt{border-color:var(--accent);background:var(--accent);color:#fff}
+.qnav{display:flex;gap:10px;margin-top:16px}
+
+/* ============ 结果 ============ */
+.rhero{text-align:center;padding:26px 0 4px}
+.rhero .e{font-size:84px;line-height:1;display:block;animation:pop .55s cubic-bezier(.2,1.5,.4,1)}
+@keyframes pop{from{transform:scale(.35);opacity:0}to{transform:scale(1);opacity:1}}
+.rhero .nm{font-size:29px;font-weight:900;margin-top:14px;letter-spacing:.5px}
+.rhero .tg{font-size:14px;color:var(--accent2);margin-top:9px;line-height:1.6;font-weight:600}
+.scorebox{display:flex;align-items:center;gap:14px;margin:20px 0 6px;padding:16px 18px;border-radius:18px;
+  background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid var(--line)}
+.scorebox .val{font-size:34px;font-weight:900;color:var(--accent2);line-height:1}
+.scorebox .lb{font-size:11.5px;color:var(--dim);line-height:1.6}
+.scorebox .lb b{display:block;font-size:13px;color:var(--txt);font-weight:700;margin-bottom:3px}
+.dims{margin-top:20px}
+.dims .drow{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-size:12.5px}
+.dims .drow .dn{width:56px;color:var(--dim);flex:0 0 56px;font-weight:600}
+.dims .drow .dt{flex:1;height:8px;background:rgba(255,255,255,.09);border-radius:5px;overflow:hidden}
+.dims .drow .dt i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  width:0;transition:width .9s cubic-bezier(.3,0,.2,1)}
+.dims .drow .dv{width:34px;text-align:right;font-weight:800;color:var(--accent2)}
+.sec{margin-top:22px}
+.sec h3{font-size:14px;font-weight:800;letter-spacing:1px;color:var(--accent2);display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.sec h3::before{content:"";width:3px;height:14px;border-radius:2px;background:var(--accent2);display:block}
+.sec p{font-size:14.5px;line-height:1.88;color:#E4DCE8}
+.quote{margin-top:22px;padding:18px 18px;border-radius:18px;background:rgba(255,255,255,.055);
+  border-left:3px solid var(--accent);font-size:15.5px;line-height:1.85;font-weight:700;color:#fff}
+.quote small{display:block;font-size:11px;color:var(--dim);font-weight:500;margin-bottom:8px;letter-spacing:1.5px}
+.tips{margin-top:16px;padding:16px 16px;border-radius:16px;background:rgba(255,255,255,.04);
+  border:1px dashed var(--line);font-size:13.5px;line-height:1.85;color:var(--dim)}
+.tips b{color:var(--accent2)}
+.share{margin-top:22px;padding:16px;border-radius:16px;background:rgba(0,0,0,.28);border:1.5px dashed rgba(255,255,255,.18)}
+.share .t{font-size:11px;color:var(--dim);letter-spacing:1px;margin-bottom:8px}
+.share .x{font-size:13px;line-height:1.78;color:#E9E1EE}
+.rfoot{margin-top:14px;font-size:10.5px;color:var(--dim);line-height:1.8;text-align:center;opacity:.7}
+
+/* ============ 图片弹层 ============ */
+#imgModal{position:fixed;inset:0;background:rgba(6,4,9,.93);z-index:99;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:18px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#imgModal .mtip{color:#fff;font-size:13.5px;font-weight:700;margin-bottom:12px;letter-spacing:.5px;text-align:center;line-height:1.6}
+#imgModal img{width:100%;max-width:330px;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.6);
+  -webkit-touch-callout:default;user-select:auto}
+#imgModal .mrow{display:flex;gap:10px;margin-top:16px;width:100%;max-width:330px}
+#imgModal .mrow .btn{padding:13px;font-size:14px}
+#toast{position:fixed;left:50%;bottom:72px;transform:translateX(-50%) translateY(20px);background:rgba(30,20,35,.96);
+  color:#fff;padding:12px 22px;border-radius:24px;font-size:13.5px;z-index:200;opacity:0;transition:all .28s;
+  pointer-events:none;border:1px solid var(--line);max-width:80%;text-align:center;line-height:1.5}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+/* 后台 */
+.adm{font-size:12.5px}
+.adm .ar{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:12px;
+  background:rgba(0,0,0,.25);margin-bottom:8px;border:1px solid var(--line)}
+.adm .ar .pw{font-family:ui-monospace,Menlo,Consolas,monospace;font-weight:700;letter-spacing:1px;font-size:13px}
+.adm .ar .us{font-size:11.5px;color:var(--dim)}
+.adm .ar .us b{color:var(--accent2)}
+.adm .ar .rs{margin-left:10px;font-size:11px;padding:5px 10px;border-radius:20px;background:rgba(255,255,255,.1);
+  cursor:pointer;color:var(--txt);border:none;font-family:inherit}
+
+/* ==================== 视觉升级 v2 ==================== */
+/* 主题：加深酒红/玫瑰金，质感更贵 */
+body[data-theme="tension"]{
+  --accent:#E8486E;
+  --accent2:#FFB0C4;
+  --glow:rgba(232,72,110,.42);
+  --bg1:#08050C;
+  --bg2:#241020;
+}
+/* 背景极光（纯渐变，不用 filter，省性能） */
+body::before,body::after{content:"";position:fixed;border-radius:50%;pointer-events:none;z-index:0}
+body::before{width:min(80vw,430px);height:min(80vw,430px);top:-150px;left:-130px;
+  background:radial-gradient(circle,rgba(232,72,110,.5),transparent 68%)}
+body::after{width:min(72vw,390px);height:min(72vw,390px);bottom:-150px;right:-130px;
+  background:radial-gradient(circle,rgba(240,199,126,.3),transparent 68%)}
+body[data-theme="savvy"]::before{background:radial-gradient(circle,rgba(216,164,69,.45),transparent 68%)}
+body[data-theme="savvy"]::after{background:radial-gradient(circle,rgba(80,175,195,.26),transparent 68%)}
+.wrap{position:relative;z-index:1}
+
+/* 卡片质感：更深投影 + 内高光 */
+.card,.panel,.qcard,.tcard{
+  border-color:rgba(255,255,255,.13);
+  box-shadow:0 22px 55px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.07);
+}
+.qcard{border-radius:26px;padding:28px 22px}
+.tcard{border-radius:24px}
+
+/* 大 emoji 发光 */
+.gate-hero .logo,.gwrap .big{filter:drop-shadow(0 6px 26px var(--glow))}
+.rhero .e{font-size:92px;filter:drop-shadow(0 8px 32px var(--glow))}
+
+/* 标题渐变字（不支持时自动回退成白字） */
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .rhero .nm{background:linear-gradient(135deg,#FFFFFF,var(--accent2) 72%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+}
+.rhero .nm{font-size:30px;letter-spacing:.8px}
+.rhero .tg{font-size:14.5px;opacity:.95}
+
+/* 主按钮：流光扫过 */
+.btn{position:relative;overflow:hidden}
+.btn:not(.ghost)::after{content:"";position:absolute;top:0;left:-55%;width:38%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);
+  transform:skewX(-18deg);animation:shine 4.2s ease-in-out infinite}
+@keyframes shine{0%,62%{left:-55%}100%{left:135%}}
+
+/* 进度条发光 */
+.bar .fill{box-shadow:0 0 14px var(--glow)}
+
+/* 选项：选中更有分量 */
+.opt{transition:all .18s cubic-bezier(.3,0,.2,1)}
+.opt.on{box-shadow:0 0 0 1px var(--accent), 0 10px 26px var(--glow);transform:translateY(-1px)}
+.opt .lt{transition:all .18s}
+.opt.on .lt{box-shadow:0 0 12px var(--glow)}
+
+/* 维度条发光 */
+.dims .drow{font-size:13px;margin-bottom:13px}
+.dims .drow .dt{height:9px}
+.dims .drow .dt i{box-shadow:0 0 10px var(--glow)}
+
+/* ★ 分数环（结果页） */
+.ringbox{display:flex;align-items:center;gap:16px;margin:22px 0 4px;padding:18px;border-radius:22px;
+  background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 18px 44px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.07)}
+.ring{width:92px;height:92px;flex:0 0 92px;position:relative}
+.ring svg{transform:rotate(-90deg);display:block}
+.ring .num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .num b{font-size:27px;font-weight:900;color:var(--accent2);line-height:1;letter-spacing:-.5px}
+.ring .num i{font-size:9px;color:var(--dim);font-style:normal;margin-top:3px;letter-spacing:1px}
+.ringinfo{flex:1;min-width:0}
+.ringinfo .t1{font-size:14px;font-weight:800;color:var(--txt);line-height:1.5}
+.ringinfo .t2{font-size:11.5px;color:var(--dim);margin-top:7px;line-height:1.7}
+.ringinfo .t2 b{color:var(--accent2);font-size:13px}
+
+/* 引用块 / 建议块 */
+.quote{border-radius:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.tips{border-radius:18px}
+
+/* ★ 选性别页：做成商品选择的样子，去掉一切说明文字 */
+.ggrid{gap:16px;margin-top:26px}
+.gbtn{padding:32px 10px;border-radius:26px;border-width:1.5px;
+  background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.02))}
+.gbtn:active{transform:scale(.955)}
+.gbtn .e{font-size:52px;filter:drop-shadow(0 6px 18px var(--glow))}
+.gbtn .n{font-size:17px;letter-spacing:6px;margin-top:12px;padding-left:6px}
+.gbtn.on{background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.04))}
+
+/* ==================== 视觉升级 v3：钩子 + 仪式感 ==================== */
+/* 撞色更亮，第一眼更有电 */
+body[data-theme="tension"]{--accent:#FF3568;--accent2:#FFC0D3;--glow:rgba(255,53,104,.46)}
+body[data-theme="savvy"]{--accent:#E8A32B;--accent2:#FFE3A6;--glow:rgba(232,163,43,.42)}
+
+/* 开场页：发光徽章 + 扩散光环 + 两侧光球 */
+.gate-hero{padding:34px 0 12px}
+.emblem{position:relative;width:136px;height:136px;margin:0 auto;display:flex;align-items:center;justify-content:center}
+.emblem .logo{font-size:60px;position:relative;z-index:2;line-height:1;
+  filter:drop-shadow(0 0 28px var(--glow));animation:floaty 3.4s ease-in-out infinite}
+.emblem .ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--accent);
+  opacity:.5;animation:ripple 3.4s ease-out infinite;pointer-events:none}
+.emblem .ring.r2{animation-delay:1.7s}
+@keyframes ripple{0%{transform:scale(.66);opacity:.6}65%{opacity:.08}100%{transform:scale(1.08);opacity:0}}
+.emblem .orb{position:absolute;border-radius:50%;filter:blur(20px);pointer-events:none}
+.emblem .orb.a{width:68px;height:68px;background:var(--accent);left:-36px;top:4px;opacity:.55;
+  animation:floaty 4.6s ease-in-out infinite}
+.emblem .orb.b{width:54px;height:54px;background:var(--accent2);right:-30px;bottom:-2px;opacity:.42;
+  animation:floaty 5.6s ease-in-out infinite reverse}
+.gate-hero h1{font-size:28px;line-height:1.5;letter-spacing:.6px;margin-top:22px}
+.gate-hero .sub{margin-top:13px;font-size:13.5px}
+
+/* "正在有人测" 的实时感 */
+.proof{display:inline-flex;align-items:center;gap:8px;margin-top:17px;padding:7px 15px;border-radius:22px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);
+  font-size:12px;color:var(--txt);letter-spacing:.3px}
+.proof .dot{width:6px;height:6px;border-radius:50%;background:#4ADE80;
+  box-shadow:0 0 8px #4ADE80;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* 题目切换：从右侧滑入 */
+@keyframes qin{from{opacity:0;transform:translateX(18px) scale(.99)}to{opacity:1;transform:none}}
+.qcard{animation:qin .3s cubic-bezier(.2,.85,.25,1)}
+.opt{border-radius:16px}
+.opt.on{background:rgba(255,255,255,.13)}
+
+/* 结果页揭晓：区块依次浮现 + 分数环填满 */
+#scrResult .ringbox,#scrResult .dims,#scrResult .sec,#scrResult .quote,
+#scrResult .tips,#scrResult .share,#scrResult .row2,#scrResult .rfoot{
+  animation:fadeUp .62s cubic-bezier(.2,.85,.25,1) both}
+.ring circle.rg{transition:stroke-dashoffset 1.25s cubic-bezier(.25,.9,.3,1)}
+.ringbox{margin-top:24px}
+.rhero{padding:30px 0 2px}
+
+/* ==================== 朝代气质·专属主题：墨底描金 ==================== */
+body[data-theme="dynasty"]{
+  --accent:#C9A227;
+  --accent2:#F2E0B0;
+  --glow:rgba(201,162,39,.42);
+  --bg1:#07090D;
+  --bg2:#141A26;
+  --txt:#F3EFE6;
+  --dim:#A79E8C;
+  --card:rgba(255,255,255,.05);
+  --line:rgba(201,162,39,.2);
+}
+body[data-theme="dynasty"]::before{background:radial-gradient(circle,rgba(192,57,43,.44),transparent 68%)}
+body[data-theme="dynasty"]::after{background:radial-gradient(circle,rgba(201,162,39,.36),transparent 68%)}
+
+/* 描金细边卡片 */
+body[data-theme="dynasty"] .card,
+body[data-theme="dynasty"] .panel,
+body[data-theme="dynasty"] .qcard,
+body[data-theme="dynasty"] .tcard{
+  border-color:rgba(201,162,39,.3);
+  box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(242,224,176,.14),
+             inset 0 0 0 1px rgba(201,162,39,.07);
+}
+/* 题卡顶部一道金线 */
+body[data-theme="dynasty"] .qcard{position:relative}
+body[data-theme="dynasty"] .qcard::before{content:"";position:absolute;left:22px;right:22px;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.75}
+
+/* 小标题前的金色竖标 */
+body[data-theme="dynasty"] .sec h3::before{content:"";display:inline-block;width:3px;height:13px;
+  background:linear-gradient(180deg,var(--accent2),var(--accent));
+  margin-right:9px;vertical-align:-1px;border-radius:2px}
+/* 引用块左侧金线 */
+body[data-theme="dynasty"] .quote{border-left:2px solid var(--accent);padding-left:16px}
+/* 金石气：名字拉开字距 */
+body[data-theme="dynasty"] .rhero .nm{letter-spacing:3px}
+body[data-theme="dynasty"] .brand{letter-spacing:7px;color:var(--accent2)}
+body[data-theme="dynasty"] .proof{border-color:rgba(201,162,39,.3)}
+/* 主按钮：描金 */
+body[data-theme="dynasty"] .btn:not(.ghost){
+  background:linear-gradient(135deg,#E7C877,#B8860B);
+  box-shadow:0 8px 26px rgba(201,162,39,.34);
+  color:#2A1F05;
+}
+</style>
+</head>
+<body data-theme="dynasty">
+<div class="wrap">
+
+  <!-- ========== 1. 门禁 ========== -->
+  <div id="scrGate">
+    <div class="brand"><i></i>测 测 研 究 所<i></i></div>
+    <div class="gate-hero">
+      <div class="emblem">
+        <span class="orb a"></span><span class="orb b"></span>
+        <span class="ring"></span><span class="ring r2"></span>
+        <div class="logo">🏯</div>
+      </div>
+      <h1>如果生在一千年前<br>你会是哪个朝代的人</h1>
+      <p class="sub">20 道题，测出你身上那口气<br>12 种朝代人格 · 从汉到清</p>
+      <div class="proof"><span class="dot"></span><span id="proofTxt">已有 23,517 人在测</span></div>
+    </div>
+
+    <div class="lockbox panel">
+      <div class="field">
+        <span style="font-size:18px;opacity:.65">🔑</span>
+        <input id="pwInput" type="password" inputmode="text" autocomplete="off" autocapitalize="characters"
+               spellcheck="false" placeholder="请输入访问密码">
+        <span class="eye" id="eyeBtn">👁</span>
+      </div>
+      <div class="err" id="gw"></div>
+      <button class="btn" id="enterBtn" style="margin-top:6px">进 入 测 评</button>
+      <div class="quota" id="quotaTip">密码由发放者提供 · 如失效请联系发放者</div>
+      <div style="text-align:center;margin-top:12px"><span onclick="openAdmin()" style="font-size:11px;color:var(--dim);opacity:.55;cursor:pointer;padding:6px">管理入口</span></div>
+    </div>
+
+    <div class="peek">
+      <div class="pk"><div class="e">🏛</div><div class="n">定力</div><div class="d">你稳不稳</div></div>
+      <div class="pk"><div class="e">🌺</div><div class="n">热度</div><div class="d">你热不热</div></div>
+      <div class="pk"><div class="e">🪷</div><div class="n">雅致</div><div class="d">你讲究不讲究</div></div>
+      <div class="pk"><div class="e">⚔️</div><div class="n">锋芒</div><div class="d">你冲不冲</div></div>
+    </div>
+    <div class="hint">本站仅用于娱乐与自我观察，不构成心理学诊断<br>结果基于公开心理学理论框架设计</div>
+  </div>
+
+  <!-- ========== 2. 选择测评 ========== -->
+  <div id="scrSelect" class="hide">
+    <div class="brand"><i></i>测 测 研 究 所<i></i></div>
+    <h1 style="text-align:center;margin-top:22px">准备好了就开始</h1>
+    <p class="sub" style="text-align:center;margin-bottom:22px" id="selQuota"></p>
+
+    <div class="tcard" id="cardDynasty" onclick="pickTest('dynasty')">
+      <div class="glowdot" style="background:#C9A227"></div>
+      <div class="hd">
+        <div class="e">🏯</div>
+        <div><div class="tt">你的朝代气质是什么</div><div class="st">20 题 · 约 4 分钟 · 12 种朝代人格</div></div>
+      </div>
+      <div class="dd">同样是人，为什么有人沉稳如汉、有人盛放如唐、有人清淡如宋？这个测评拆的是你身上那股"隔着千年也认得出来"的气——不是性格标签，而是你处理事情时的底色。</div>
+      <div class="tags"><span>定力</span><span>热度</span><span>雅致</span><span>锋芒</span></div>
+      <div class="go">开始测试 →</div>
+    </div>
+
+    <div class="credit">
+      <b>理论参考：</b>大五人格模型（Costa &amp; McCrae, 1992）；文化—人格一致性研究（Triandis, 1995）；自我建构理论（Markus &amp; Kitayama, 1991）；叙事身份理论（McAdams, 2001）；特质激活理论（Tett &amp; Guterman, 2000）。
+    </div>
+    <div class="row2"><button class="btn ghost" onclick="switchPwd()">切换密码</button><button class="btn ghost" onclick="showGate()">返回首页</button></div>
+  </div>
+
+  <!-- ========== 3. 选性别 ========== -->
+  <div id="scrGender" class="hide">
+    <div class="brand"><i></i>测 测 研 究 所<i></i></div>
+    <div class="gwrap">
+      <div class="big">💋</div>
+      <h1>选择你的版本</h1>
+    </div>
+    <div class="ggrid">
+      <button class="gbtn" onclick="setGender('m')"><span class="e">🕴</span><span class="n">男 生</span></button>
+      <button class="gbtn" onclick="setGender('f')"><span class="e">💃</span><span class="n">女 生</span></button>
+    </div>
+    <div class="row2" style="margin-top:24px"><button class="btn ghost" onclick="showSelect()">← 返回上一级</button></div>
+  </div>
+
+  <!-- ========== 4. 答题 ========== -->
+  <div id="scrQuiz" class="hide">
+    <div class="qtop">
+      <span class="back" onclick="quitQuiz()">‹ 退出</span>
+      <span class="cnt" id="qcnt"></span>
+      <span class="back" id="prevBtn" onclick="prevQ()">上一题</span>
+    </div>
+    <div class="bar"><div class="fill" id="qfill" style="width:0%"></div></div>
+    <div class="qcard" id="qcard"></div>
+    <div class="qnav">
+      <button class="btn ghost" id="qBackBtn" onclick="prevQ()" style="flex:1">← 上一题</button>
+      <button class="btn" id="qNextBtn" onclick="nextQ()" style="flex:1.4" disabled>下一题 →</button>
+    </div>
+    <div class="hint" id="qhint"></div>
+  </div>
+
+  <!-- ========== 5. 结果 ========== -->
+  <div id="scrResult" class="hide"></div>
+
+  <!-- ========== 6. 后台 ========== -->
+  <div id="scrAdmin" class="hide">
+    <div class="brand"><i></i>管 理 后 台<i></i></div>
+    <h1 style="text-align:center;margin-top:20px;font-size:22px">密码额度管理</h1>
+    <p class="sub" style="text-align:center">每密码上限 <b id="admMax"></b> 次 · 数据实时存储在服务器</p>
+    <div class="panel adm" id="admList" style="margin-top:20px"></div>
+    <div class="row2"><button class="btn ghost" onclick="resetAll()">重置全部</button><button class="btn" onclick="showGate()">返回首页</button></div>
+    <div class="credit">数据来自 Supabase，跨设备实时同步。重置会清空该密码的使用记录；作废会让密码永久失效（退款场景用）。</div>
+  </div>
+
+</div>
+
+<!-- 图片弹层 -->
+<div id="imgModal" class="hide">
+  <div class="mtip">长按下面的图片 → 保存到相册 📥</div>
+  <img id="cardImg" alt="测评结果卡片">
+  <div class="mrow">
+    <button class="btn ghost" onclick="closeModal()">关 闭</button>
+    <button class="btn" onclick="downloadImg()">下载图片</button>
+  </div>
+  <div class="mtip" style="font-size:11.5px;opacity:.65;margin-top:14px;font-weight:500">iOS / 安卓：长按图片选择"存储图像"<br>微信内打开请点右上角 → 在浏览器中打开</div>
+</div>
+<div id="toast"></div>
+
+<script>
+/* =========================================================
+   ▼▼▼ 部署前只需要改这里 ▼▼▼
+
+   SB_URL : Supabase 项目地址
+            Supabase 控制台 → Project Settings → Data API → Project URL
+   SB_KEY : anon public key
+            Supabase 控制台 → Project Settings → Data API → anon public
+            （这个 key 设计上就是公开的，放前端是安全的：
+              真正的密钥存在数据库里，前端读不到）
+   PREFIX : 本站只认这个前缀的密码，要和 gen_passwords.py 生成时一致
+
+   后端脚本：../_后端方案/supabase_setup.sql（在 Supabase 里执行一次）
+   ========================================================= */
+var SB_URL = 'https://ytflyofjtsttinucrtfj.supabase.co';
+var SB_KEY = 'sb_publishable_OttYqTcRqXnf-snk20SLpg_fTT2RLxF';
+var PREFIX = 'CDQZ';
+
+var MAX_USES  = 3;                       /* 与数据库里的 max_uses 保持一致 */
+var SS_KEY    = 'cy_pwd_' + PREFIX.toLowerCase();
+var LS_KEY    = 'cy_usage_' + PREFIX.toLowerCase();
+var FALLBACK_LOCAL = false;              /* true = 后端连不上时允许离线测试（正式上线请保持 false） */
+
+/* ================= 工具 ================= */
+function $(id){ return document.getElementById(id); }
+function loadUsage(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)) || {}; }catch(e){ return {}; } }
+function saveUsage(u){ try{ localStorage.setItem(LS_KEY, JSON.stringify(u)); }catch(e){} }
+/* ---------- Supabase RPC（用原生 fetch，不依赖任何 CDN） ---------- */
+function sbReady(){
+  return SB_URL.indexOf('YOUR-PROJECT') < 0 && SB_KEY.indexOf('YOUR-ANON') < 0
+         && SB_URL.indexOf('supabase.co') > 0;
+}
+function sbHeaders(){
+  var h = { 'apikey': SB_KEY, 'Content-Type': 'application/json' };
+  /* 兼容两代 key：
+     - 老版 anon JWT（eyJ 开头）→ 两个 header 都发
+     - 新版 publishable（sb_publishable_…）→ 只发 apikey，PostgREST 会落到 anon 角色 */
+  if (SB_KEY.indexOf('eyJ') === 0) h['Authorization'] = 'Bearer ' + SB_KEY;
+  return h;
+}
+function sbRpc(fn, params){
+  var url = SB_URL.replace(/\/+$/, '') + '/rest/v1/rpc/' + fn;
+  return fetch(url, {
+    method: 'POST',
+    headers: sbHeaders(),
+    body: JSON.stringify(params || {})
+  }).then(function(r){
+    return r.text().then(function(txt){
+      var j = null;
+      try { j = JSON.parse(txt); } catch (e) {}
+      if (j === null) throw new Error('bad_response');
+      return j;
+    });
+  });
+}
+/* 把用户输入规范化成 PREFIX-XXXXXX-XXXX
+   容忍：漏横杠、多空格、大小写混乱、中文输入法打出的全角字母数字 */
+function normInput(v){
+  var s = String(v || '').replace(/[\uFF01-\uFF5E]/g, function(c){
+    return String.fromCharCode(c.charCodeAt(0) - 0xFEE0);   /* 全角 → 半角 */
+  }).replace(/\u3000/g, ' ');
+  s = s.toUpperCase().replace(/[^0-9A-Z]/g, '');
+  var p = PREFIX.toUpperCase();
+  if (s.indexOf(p) === 0) s = s.slice(p.length);
+  if (s.length === 10) return p + '-' + s.slice(0, 6) + '-' + s.slice(6);
+  return s;
+}
+/* PREFIX + '-' + 6位随机 + '-' + 4位校验 = PREFIX.length + 12 */
+function expectedLen(){ return PREFIX.length + 12; }
+function toast(msg){
+  var t = $('toast'); t.textContent = msg; t.classList.add('on');
+  clearTimeout(t._tm); t._tm = setTimeout(function(){ t.classList.remove('on'); }, 1900);
+}
+function show(id){
+  ['scrGate','scrSelect','scrGender','scrQuiz','scrResult','scrAdmin'].forEach(function(s){
+    $(s).classList.toggle('hide', s !== id);
+  });
+  window.scrollTo(0,0);
+}
+
+/* ================= 门禁（Supabase 版） ================= */
+var curPwd = '';
+var serverLeft = null;      /* 服务端返回的剩余次数，null = 未知 */
+var serverMax = MAX_USES;
+var online = false;         /* 本次会话是否走的后端 */
+var admKey = '';
+
+function shake(el){
+  el.style.transition = 'transform .07s';
+  var n = 0;
+  var t = setInterval(function(){
+    el.style.transform = (n % 2 ? 'translateX(-6px)' : 'translateX(6px)');
+    if (++n > 5){ clearInterval(t); el.style.transform = 'none'; el.style.transition = ''; }
+  }, 70);
+}
+
+function tryEnter(){
+  var raw = ($('pwInput').value || '').trim();
+  var v = normInput(raw);
+  var gw = $('gw');
+  gw.textContent = '';
+
+  if (!raw){ gw.textContent = '请输入密码'; return; }
+  if (!sbReady()){
+    gw.innerHTML = '⚠️ 网站还没配置后端<br>请在 index.html 里填好 SB_URL 和 SB_KEY';
+    return;
+  }
+  if (v.length !== expectedLen()){
+    gw.innerHTML = '密码不完整，请检查是否复制少了字符<br>正确格式：' + PREFIX + '-XXXXXX-XXXX';
+    shake($('pwInput'));
+    return;
+  }
+
+  var btn = $('enterBtn');
+  btn.disabled = true;
+  btn.textContent = '验证中…';
+
+  sbRpc('pwd_check', { p_pwd: v, p_prefix: PREFIX }).then(function(d){
+    btn.disabled = false;
+    btn.textContent = '进 入 测 评';
+    if (d && d.ok){
+      online = true;
+      curPwd = v;
+      serverLeft = d.left;
+      serverMax = d.max || MAX_USES;
+      try{ sessionStorage.setItem(SS_KEY, v); }catch(e){}
+      $('pwInput').value = '';
+      showSelect();
+      return;
+    }
+    var reason = (d && d.reason) || 'error';
+    if (reason === 'used_up'){
+      serverMax = (d && d.max) || MAX_USES;
+      gw.innerHTML = '这个密码的 ' + serverMax + ' 次机会已经用完了<br>需要新密码请联系发放者';
+    } else if (reason === 'invalid'){
+      gw.innerHTML = '密码不正确，请检查是否输错或复制不完整';
+      shake($('pwInput'));
+    } else if (reason === 'banned'){
+      gw.innerHTML = '这个密码已经失效，请联系发放者';
+    } else if (reason === 'server_not_configured'){
+      gw.innerHTML = '后端密钥还没配置<br>（请在 Supabase 里执行 supabase_setup.sql）';
+    } else {
+      gw.innerHTML = '服务器返回异常，请稍后重试';
+    }
+  }).catch(function(){
+    btn.disabled = false;
+    btn.textContent = '进 入 测 评';
+    if (FALLBACK_LOCAL){ offlineEnter(v); return; }
+    gw.innerHTML = '连不上服务器，请检查网络后重试<br>（如果一直失败，请联系发放者）';
+  });
+}
+
+/* 离线兜底：只有 FALLBACK_LOCAL = true 时才会走到，次数只记在本机 */
+function offlineEnter(v){
+  var u = loadUsage();
+  var used = u[v] || 0;
+  if (used >= MAX_USES){
+    $('gw').innerHTML = '这个密码的 ' + MAX_USES + ' 次机会已经用完了';
+    return;
+  }
+  online = false;
+  curPwd = v;
+  serverLeft = MAX_USES - used;
+  serverMax = MAX_USES;
+  $('pwInput').value = '';
+  toast('离线模式：次数只记在这台设备上');
+  showSelect();
+}
+
+function showGate(){
+  $('quotaTip').innerHTML = (curPwd && serverLeft !== null)
+    ? '当前密码剩余 <b>' + serverLeft + '</b> 次'
+    : '密码由发放者提供 · 如失效请联系发放者';
+  show('scrGate');
+}
+function switchPwd(){
+  try{ sessionStorage.removeItem(SS_KEY); }catch(e){}
+  curPwd = ''; serverLeft = null; online = false;
+  $('pwInput').value = ''; $('gw').textContent = '';
+  showGate();
+}
+
+/* ---------- 后台 ---------- */
+function openAdmin(){
+  var k = prompt('请输入管理员密钥（supabase_setup.sql 里设置的 admin_key）');
+  if (!k) return;
+  admKey = k.trim();
+  $('admList').innerHTML = '<div style="text-align:center;padding:20px;color:var(--dim)">加载中…</div>';
+  show('scrAdmin');
+  renderAdmin();
+}
+function renderAdmin(){
+  if (!sbReady()){
+    $('admList').innerHTML = '<div style="text-align:center;padding:20px;color:#FF8593">后端未配置</div>';
+    return;
+  }
+  sbRpc('pwd_admin_list', { p_key: admKey }).then(function(d){
+    if (!d || !d.ok){
+      var msg = (d && d.reason) === 'forbidden' ? '管理员密钥不正确' : '读取失败';
+      $('admList').innerHTML = '<div style="text-align:center;padding:20px;color:#FF8593">' + msg + '</div>';
+      return;
+    }
+    $('admMax').textContent = d.max;
+    var items = d.items || [];
+    if (!items.length){
+      $('admList').innerHTML = '<div style="text-align:center;padding:20px;color:var(--dim)">还没有人使用过</div>';
+      return;
+    }
+    var html = '<div style="font-size:11.5px;color:var(--dim);margin-bottom:10px">共 ' + items.length + ' 个密码被使用过 · 按最近使用排序</div>';
+    items.forEach(function(it){
+      html += '<div class="ar"><span class="pw">' + it.pwd + '</span>' +
+              '<span><span class="us">用 <b>' + it.used + '</b> / ' + it.max + '</span>' +
+              '<button class="rs" onclick="resetOne(\'' + it.pwd + '\')">重置</button>' +
+              '<button class="rs" onclick="banOne(\'' + it.pwd + '\')">作废</button></span></div>';
+    });
+    $('admList').innerHTML = html;
+  }).catch(function(){
+    $('admList').innerHTML = '<div style="text-align:center;padding:20px;color:#FF8593">网络错误，请重试</div>';
+  });
+}
+function resetOne(p){
+  if (!confirm('重置 ' + p + ' 的使用次数？')) return;
+  sbRpc('pwd_admin_reset', { p_key: admKey, p_pwd: p }).then(function(){ toast('已重置 ' + p); renderAdmin(); });
+}
+function resetAll(){
+  if (!confirm('确定重置所有密码的使用次数？')) return;
+  sbRpc('pwd_admin_reset', { p_key: admKey, p_pwd: '*' }).then(function(){ toast('全部已重置'); renderAdmin(); });
+}
+function banOne(p){
+  if (!confirm('把 ' + p + ' 加入作废名单？这个密码会立刻失效。')) return;
+  sbRpc('pwd_admin_ban', { p_key: admKey, p_pwd: p, p_reason: 'manual' }).then(function(){ toast('已作废 ' + p); renderAdmin(); });
+}
+
+/* ================= 测试数据：朝代气质 ================= */
+var D_DIMS = {
+  chen:{ n:'定力',
+    hi:'你是那种"天塌下来先看怎么补"的人。情绪不写在脸上，压力不往外倒。你身上有一种让人愿意把事情托付给你的稳——不是没有感觉，是感觉之外还站得住。',
+    lo:'你的节奏容易被外界带走，别人一急你也急。下次被推着走之前，先问自己一句"这真是我想要的吗"——你的定力会在那一刻长出来。' },
+  chi :{ n:'热度',
+    hi:'你身上有生命力。高兴就笑、喜欢就说、想做就去做。你的能量是往外放的，能带动一整个场子，也让人在你身边胆子变大。',
+    lo:'你的能量偏收。不是冷淡，是你习惯把热藏在里面。偶尔让别人看见一次你的高兴，关系会一下子近很多。' },
+  ya  :{ n:'雅致',
+    hi:'你有真实的审美——你会注意到别人注意不到的细节，也有把普通日子过出质感的能力。这份讲究不是花钱买来的，是你自己长出来的。',
+    lo:'你更看重实用，不太在意形式。试着为"好看"多花一点心思——你会惊讶于别人对你的态度变化。' },
+  feng:{ n:'锋芒',
+    hi:'你决断快、出手准，认定的事不拖。别人还在权衡的时候，你已经走完了三步。这种锐利是稀缺的，它让你在人群里不太好被替代。',
+    lo:'你更愿意顺势而为，不爱争。这让你活得舒服，但也容易让本该属于你的东西从手边滑过去。' }
+};
+var D_DIM_ORDER = ['chen','chi','ya','feng'];
+
+var D_TYPES = {
+  han:{ e:'🏯', name:'汉·沉雄', tag:'不声张，但你站的地方就是中心', p:{chen:3,chi:1,ya:2,feng:3},
+    desc:'你的力量是"沉"的。你不太解释自己，也不太需要别人的认可；事情到你手里，会自然地变稳。你身上有一种很老的气质——不炫技、不表演，但一旦需要有人扛事，所有的目光会先落到你身上。你给人的安全感不靠承诺，靠的是"这个人说话算数"。',
+    sec2:'别人对你的第一印象往往是"有点闷"，第二印象是"这人靠谱"，第三印象是"还好有他"。你不擅长在热闹里出彩，但你一走，那个圈子会明显地松掉一格。',
+    sec3:'你从不解释自己为什么这么做——因为做过的事，本身就是解释。',
+    tip:'你的风险是"太重"。习惯了自己扛，别人就真的以为你不需要帮忙。偶尔示弱一次，你会得到比想象中多得多的靠近。' },
+  tang:{ e:'🌺', name:'唐·盛光', tag:'你要的不是被喜欢，是被看见', p:{chen:1,chi:3,ya:3,feng:3},
+    desc:'你身上有一种"盛"的劲儿。喜欢就大声说，好看就大方展示，开心的时候整个人都在发光。你不太藏情绪，也不太装冷淡——因为在你看来，活着本来就该是热闹的、有颜色的。你不是不敏感，你只是选择把敏感用来感受美好，而不是防备别人。',
+    sec2:'你在人群里是自带光源的那一种。有人觉得你张扬，更多人是被你带动的——你在的场合，气氛冷不下来。你的存在让别人敢放开一点，这是很难得的天赋。',
+    sec3:'你从不吝啬自己的热气，所以你走到哪里，哪里就亮了。',
+    tip:'你的风险是"用力过猛"。热烈的东西容易被消耗掉，给自己留一点独处和充电的时间，你的光才能一直亮着，而不是烧完。' },
+  song:{ e:'🍃', name:'宋·清雅', tag:'你把日子过成了别人羡慕的样子', p:{chen:3,chi:1,ya:3,feng:1},
+    desc:'你的气质是"细"的。你会注意到一杯茶的温度、一张桌子的比例、一句话里的分寸。你不追求轰轰烈烈，你追求的是"刚刚好"。你的审美不是买出来的，是看出来的——你身上有一种把普通日子过出质感的能力，这是很多人一辈子学不会的。',
+    sec2:'别人靠近你之后，会不自觉地放轻声音、放慢语速。你不是高冷，你是安静得让人想对你好一点。你身上有一种很稀缺的"不急"。',
+    sec3:'你不需要被所有人理解，你只需要一个也懂得"慢"的人。',
+    tip:'你的风险是"太收"。讲究久了容易变成挑剔，挑剔久了会把人推远。偶尔允许一点不完美，你的雅致才不会变成距离。' },
+  weijin:{ e:'🍶', name:'魏晋·疏狂', tag:'你活成了规矩之外的那一个', p:{chen:1,chi:3,ya:3,feng:2},
+    desc:'你身上有一种不驯的东西。你看得懂规则，但你不想被它绑住；你尊重别人的选择，但你不打算为任何人的期待而活。你的魅力来自"真"——别人在演，你在活。你不一定叛逆，但你一定自由。',
+    sec2:'别人对你的评价往往两极：有人觉得你"太难搞"，有人觉得你"太有意思"。而你从来不打算取悦两边——喜欢你的人，喜欢的正是这份不解释。',
+    sec3:'你最大的体面，是从来没有为了合群而委屈自己。',
+    tip:'你的风险是"把人推得太远"。自由不等于关上门——给愿意等你的人留一扇门，你的洒脱才有人接得住。' },
+  ming:{ e:'⚔️', name:'明·刚介', tag:'你认的理，谁也掰不弯', p:{chen:3,chi:2,ya:1,feng:3},
+    desc:'你身上有硬的东西。你有自己的准则，而且你为它付得起代价。你不擅长和稀泥，也懒得说场面话——在你看来，把话说明白比让所有人舒服更重要。你的"不好惹"不是脾气，是底线。',
+    sec2:'认识你的人都知道：跟你打交道不用猜。你答应了就是答应了，你不同意就是不同意。这种确定，在一个人人都在留后路的时代里，非常珍贵。',
+    sec3:'你宁可被人说不好相处，也不愿意有一天看不起自己。',
+    tip:'你的风险是"棱角伤人也伤己"。对原则硬，对人心软一点——同样的坚持，换个说法，别人会更愿意跟你站在一起。' },
+  qin:{ e:'⚡', name:'秦·锋锐', tag:'你要的是结果，不是过程', p:{chen:2,chi:2,ya:1,feng:3},
+    desc:'你的思维是"直线"的。看到目标就直奔过去，中间那些客套、铺垫、绕弯子，在你眼里都是损耗。你决定得快、出手狠、复盘清楚，做完了就翻篇。你身上有一种让别人不太敢拖延的压迫感——因为你自己从不拖延。',
+    sec2:'别人对你的第一印象是"效率高"，第二印象是"别糊弄他"。你能在别人还在犹豫的时候把事情推进三步，这种人放到哪里都会被记住。',
+    sec3:'你不在乎别人说你冷，你在乎的是——事情成了没有。',
+    tip:'你的风险是"只看终点，忽略人"。推进的时候带上身边的人，你的锋利才不会变成孤军奋战。' },
+  chu:{ e:'🎋', name:'楚·浪漫', tag:'你连难过都很美', p:{chen:1,chi:3,ya:3,feng:1},
+    desc:'你的感受力比常人细密得多。你会为一片云、一句歌词、一个陌生人的眼神而在心里动一下。你重情，而且记得住——那些别人早就忘掉的细节，你都还收着。你的气质里有一种不实用的美，而正是这种不实用，让你和别人不一样。',
+    sec2:'别人跟你相处久了会发现，你比看上去深情得多。你不太说，但你什么都记得。你的在乎不吵不闹，却一直都在。',
+    sec3:'你从来没有学会敷衍感情——所以你活得比很多人累，也比很多人真。',
+    tip:'你的风险是"太满"。感受力强的人容易被情绪拖走。给情绪找一个出口（写、画、唱、走一走），而不是一直往里装。' },
+  yuan:{ e:'🐎', name:'元·辽阔', tag:'你受不了被框住', p:{chen:1,chi:3,ya:1,feng:3},
+    desc:'你需要空间。不管是物理上的还是心理上的，一旦被规定、被安排、被盯着，你的能量就会掉下去。你适合用脚丈量世界，适合说走就走，适合那种"明天的事明天再说"的痛快。你不是没有责任感，你只是更需要天大地大。',
+    sec2:'别人会觉得你"抓不住"。但正是这种抓不住，让人对你念念不忘——你身上总有一种随时会出发的可能，这让跟你在一起的日子不会无聊。',
+    sec3:'你唯一不能忍的，是被人安排好的一生。',
+    tip:'你的风险是"散"。自由需要锚点——给自己定一件必须完成的事，你的辽阔才不会变成漂着。' },
+  qing:{ e:'🏮', name:'清·圆融', tag:'你让所有人都下得来台', p:{chen:3,chi:2,ya:3,feng:1},
+    desc:'你是那种"懂事"的人，但你的懂事不是软弱，是通透。你看得懂场面上每个人的位置，也清楚哪句话该说、哪句该咽。你很少把人逼到墙角，因为你知道——留人一条路，日后自己才有路。你的能量是圆的，谁靠近都不会被扎到。',
+    sec2:'你身边总有"什么话都愿意跟你说"的人。因为你不评判、不传播、不利用。别人在你这里，可以安全地做一次不完美的自己。',
+    sec3:'你最大的聪明，是让别人觉得自己也很聪明。',
+    tip:'你的风险是"太照顾别人的感受"。你也会累，也会委屈——偶尔让一个人知道你的真实想法，关系才会更深。' },
+  zongheng:{ e:'🎴', name:'战国·纵横', tag:'你看局，不看热闹', p:{chen:2,chi:2,ya:3,feng:3},
+    desc:'你天生对"局"敏感。谁和谁是什么关系、谁在试探谁、这件事真正的筹码在哪——你扫一眼心里就有数。你不一定爱说，但你心里有一张图。你的判断力来自长期的观察，而不是一时的聪明，所以它比聪明更稳。',
+    sec2:'别人跟你聊过几次之后，会不自觉地开始跟你商量事情。因为你说的话往往不是情绪，是结论——而且往往是对的。',
+    sec3:'你从来不是最吵的那一个，但你经常是最后一个被问"你怎么看"的人。',
+    tip:'你的风险是"看得太清，就不想下场"。把判断力用在自己的事上，你可以做成比现在大得多的事。' },
+  renxia:{ e:'🗡', name:'春秋·任侠', tag:'你答应的事，命都给你办到', p:{chen:2,chi:3,ya:1,feng:3},
+    desc:'你身上有一股义气。你不太算计请托的分量，只要认了这份交情，你就会往前站。你不喜欢背后议论人，也看不得有人被欺负——看见不平事，你嘴上可能不说，心里已经决定要管。你的力量不在拳头，在那句"这事我来"。',
+    sec2:'你的朋友不多，但每一个都是能一起扛事的。别人可能觉得你"太直""太冲动"，但真正跟你共过事的人，会一辈子记得你。',
+    sec3:'你从不算计谁欠谁——因为在你这里，情义本来就不能称重。',
+    tip:'你的风险是"替不值得的人挡刀"。义气要给对的人。先看一眼对方值不值得，你的热血才不会被辜负。' },
+  shangzhou:{ e:'🏛', name:'商周·玄谨', tag:'你不轻易说话，但你说的话有分量', p:{chen:3,chi:1,ya:3,feng:2},
+    desc:'你身上有一种古老的郑重感。你对天地、对因果、对"做事的规矩"有一种天然的敬畏——不一定信什么，但你心里有界限。你不爱轻浮的玩笑，也不喜欢把什么事都说尽。你的沉默不是冷淡，是分量。',
+    sec2:'你身边的人会莫名地尊重你。你不太社交，但你的存在感很特别——像房间里一件用久了的东西，不吵，却让人安心。别人在你面前，会不自觉地说实话。',
+    sec3:'你相信有些东西是不能拿来开玩笑的——底线就是你的信仰。',
+    tip:'你的风险是"太严肃"。允许生活里有玩笑、有松弛、有一点无用之事，你的庄重才不会变成孤高。' }
+};
+var D_ORDER = ['han','tang','song','weijin','ming','qin','chu','yuan','qing','zongheng','renxia','shangzhou'];
+
+var Q_D = [
+ { q:'计划好的事，突然被打乱了。你的第一反应是——', o:[
+   {t:'先稳住，把眼前能做的做掉，再想下一步', a:'han'},
+   {t:'换个玩法，说不定比原计划更好', a:'tang'},
+   {t:'心里堵一下，需要点时间自己消化', a:'song'},
+   {t:'那正好，本来也没多想按计划来', a:'weijin'} ] },
+ { q:'有人明里暗里挡你的路——', o:[
+   {t:'当面把话挑明，我不怕撕破脸', a:'ming'},
+   {t:'不吵，直接绕过他，用结果说话', a:'qin'},
+   {t:'会难过很久，也会一直记得', a:'chu'},
+   {t:'不耗了，换条路走，地方大着呢', a:'yuan'} ] },
+ { q:'饭桌上有人说了句让所有人都尴尬的话——', o:[
+   {t:'接一句圆过去，谁都不难看', a:'qing'},
+   {t:'不接话，心里把这个人重新评估了一遍', a:'zongheng'},
+   {t:'会替被冒犯的那个人出头', a:'renxia'},
+   {t:'觉得不妥，但不会当场表现出来', a:'shangzhou'} ] },
+ { q:'你更怕哪一种失败？', o:[
+   {t:'怕自己违背了认下的理', a:'ming'},
+   {t:'怕忙了半天，最后没拿到结果', a:'qin'},
+   {t:'怕辜负了在意我的人', a:'chu'},
+   {t:'怕被这件事困住，再也走不出去', a:'yuan'} ] },
+ { q:'别人对你最多的评价是——', o:[
+   {t:'会做人，跟你相处很舒服', a:'qing'},
+   {t:'话不多，但说得准', a:'zongheng'},
+   {t:'讲义气，事能托给你', a:'renxia'},
+   {t:'看着有分寸，不熟但很尊重你', a:'shangzhou'} ] },
+ { q:'如果看一眼你住的地方，最能说明你的是——', o:[
+   {t:'简单、结实，够用就行', a:'han'},
+   {t:'东西很多，颜色很满，都是我喜欢的', a:'tang'},
+   {t:'收拾得很讲究，看着让人安静', a:'song'},
+   {t:'有点乱，但每样东西都有它的故事', a:'weijin'} ] },
+ { q:'你做决定时的第一反应是——', o:[
+   {t:'先想这个决定会不会让别人难做', a:'qing'},
+   {t:'先看整件事的局势和筹码', a:'zongheng'},
+   {t:'先问自己心里舒不舒服', a:'renxia'},
+   {t:'先看这件事合不合规矩', a:'shangzhou'} ] },
+ { q:'遇到不公平的事——', o:[
+   {t:'会站出来，哪怕对我没好处', a:'han'},
+   {t:'会直接说出来，我不喜欢装看不见', a:'tang'},
+   {t:'心里不舒服，但不会去争', a:'song'},
+   {t:'笑一声，这世界本来就这样', a:'weijin'} ] },
+ { q:'关于"规则"——', o:[
+   {t:'定下来的规矩就该守，不然要它干嘛', a:'ming'},
+   {t:'规矩挡路就绕，我要的是结果', a:'qin'},
+   {t:'规矩是人定的，伤了人就不对', a:'chu'},
+   {t:'有些规矩，本来就不该存在', a:'yuan'} ] },
+ { q:'你希望别人这样记住你——', o:[
+   {t:'靠得住', a:'han'},
+   {t:'活得漂亮', a:'tang'},
+   {t:'有品味', a:'song'},
+   {t:'活得自在', a:'weijin'} ] },
+ { q:'你怎么看待"面子"？', o:[
+   {t:'面子是自己挣的，不是别人给的', a:'ming'},
+   {t:'面子不重要，结果才重要', a:'qin'},
+   {t:'为了在意的人，我可以放下面子', a:'chu'},
+   {t:'面子是别人给的枷锁，我不在乎', a:'yuan'} ] },
+ { q:'在一个团队里，你通常是——', o:[
+   {t:'把所有人的关系理顺的那个人', a:'qing'},
+   {t:'关键时刻给出判断的那个人', a:'zongheng'},
+   {t:'出事时第一个站出来的那个人', a:'renxia'},
+   {t:'不多话，但让人安心的那个人', a:'shangzhou'} ] },
+ { q:'最容易被激怒你的点是——', o:[
+   {t:'有人当面撒谎，还觉得别人看不出来', a:'ming'},
+   {t:'一件事反复拖，没人推进', a:'qin'},
+   {t:'有人辜负了我的真心', a:'chu'},
+   {t:'有人想管我、限制我', a:'yuan'} ] },
+ { q:'朋友做了你很不认同的事——', o:[
+   {t:'会委婉提醒，不让关系难看', a:'qing'},
+   {t:'先想清楚他为什么这么做，再决定', a:'zongheng'},
+   {t:'直接问他，朋友的事不能装看不见', a:'renxia'},
+   {t:'不多说，各人有各人的因果', a:'shangzhou'} ] },
+ { q:'你身上最"老"的那部分是——', o:[
+   {t:'认死理，答应了就一定做到', a:'han'},
+   {t:'心里总有热气，什么年纪都爱热闹', a:'tang'},
+   {t:'讲究，连喝一杯水都想喝得舒服', a:'song'},
+   {t:'不服从任何安排，包括自己的计划', a:'weijin'} ] },
+ { q:'别人第一次见你，最可能觉得你——', o:[
+   {t:'温和、好相处', a:'qing'},
+   {t:'冷静，话里有东西', a:'zongheng'},
+   {t:'热、直，让人放心', a:'renxia'},
+   {t:'正经，有距离感但很值得尊重', a:'shangzhou'} ] },
+ { q:'一段让你很累的关系，你会——', o:[
+   {t:'该我扛的我扛，不躲', a:'han'},
+   {t:'想办法把它变好，或者彻底换掉', a:'tang'},
+   {t:'慢慢退出来，不吵不闹', a:'song'},
+   {t:'直接走，没有谁离不开谁', a:'weijin'} ] },
+ { q:'你做事最大的特点是——', o:[
+   {t:'定了就不改，认准就做完', a:'ming'},
+   {t:'快，而且只做有用的部分', a:'qin'},
+   {t:'投入，会把心放进去', a:'chu'},
+   {t:'自由，不受框架和节奏的限制', a:'yuan'} ] },
+ { q:'用一句话形容你最真实的状态——', o:[
+   {t:'没事的时候最稳，有事的时候最靠得住', a:'han'},
+   {t:'表面平静，心里其实很讲究', a:'song'},
+   {t:'不太合群，但一定是能指望上的那个', a:'ming'},
+   {t:'谁都觉得我很好说话，其实我很有主见', a:'qing'} ] },
+ { q:'如果一生只能留下一样东西，你留——', o:[
+   {t:'让日子好看的能力', a:'tang'},
+   {t:'说不就不的自由', a:'weijin'},
+   {t:'看清局面的脑子', a:'zongheng'},
+   {t:'敢为朋友出头的义气', a:'renxia'} ] }
+];
+
+/* ================= 测试注册表 ================= */
+var TESTS = {
+  dynasty:{
+    key:'dynasty', theme:'dynasty', emoji:'🏯',
+    title:'你的朝代气质是什么', short:'朝代气质测评',
+    scoreLabel:'气质浓度', scoreUnit:'分',
+    beatBase:24, beatRate:.92,
+    sample:'23,517',
+    gender:false,
+    types:D_TYPES, order:D_ORDER, dims:D_DIMS, dimOrder:D_DIM_ORDER,
+    questions:function(){ return Q_D; },
+    strongTitle:'你的气质成分',
+    genderTitle:null,
+    tipTitle:'可以更好的地方',
+    cardTitle:'我的朝代气质',
+    footer:'测测研究所 · 朝代气质测评',
+    analysisIntro:'你的朝代气质由四个维度构成。数值越高，说明这部分越是你身上最原始、最不经修饰的东西；最低的那一项，就是你最容易被别人误读的地方。'
+  }
+};
+var ONLY_TEST = 'dynasty';
+
+/* ================= 状态与流程 ================= */
+var state = { test:null, gender:null, qs:[], qi:0, ans:[], used:false, res:null };
+
+function pickTest(key){
+  var t = TESTS[key];
+  state.test = key;
+  document.body.setAttribute('data-theme', t.theme);
+  if (t.gender){ show('scrGender'); }
+  else { beginQuiz(); }
+}
+function setGender(g){
+  state.gender = g;
+  document.querySelectorAll('.gbtn').forEach(function(b){ b.classList.remove('on'); });
+  beginQuiz();
+}
+function showSelect(){
+  document.body.setAttribute('data-theme', state.test ? TESTS[state.test].theme : TESTS[ONLY_TEST].theme);
+  $('selQuota').innerHTML = '当前密码剩余 <b>' + (serverLeft === null ? '—' : serverLeft) + '</b> 次机会 · 每次完成测评消耗 1 次';
+  show('scrSelect');
+}
+function beginQuiz(){
+  var t = TESTS[state.test];
+  state.qs = t.questions(state.gender);
+  state.qi = 0;
+  state.ans = new Array(state.qs.length).fill(-1);
+  state.used = false;
+  $('qhint').innerHTML = state.gender
+    ? '当前版本：<b style="color:var(--accent2)">' + (state.gender === 'm' ? '男生版' : '女生版') + '</b> · 可随时点"上一题"修改'
+    : '可随时点"上一题"修改答案';
+  show('scrQuiz');
+  renderQ();
+}
+function renderQ(){
+  var t = TESTS[state.test], n = state.qs.length, q = state.qs[state.qi];
+  $('qcnt').innerHTML = '<i>' + (state.qi + 1) + '</i> / ' + n;
+  $('qfill').style.width = ((state.qi) / n * 100) + '%';
+  $('prevBtn').style.visibility = 'visible';
+  $('prevBtn').textContent = state.qi === 0 ? '返回上一步' : '上一题';
+  var card = $('qcard');
+  card.innerHTML = '';
+  card.style.animation = 'none'; void card.offsetWidth; card.style.animation = '';
+  var h = document.createElement('div');
+  h.className = 'q';
+  h.innerHTML = '<span class="idx">Q' + (state.qi + 1) + '</span>' + q.q;
+  card.appendChild(h);
+  var LT = ['A','B','C','D','E'];
+  q.o.forEach(function(o,i){
+    var b = document.createElement('button');
+    b.className = 'opt' + (state.ans[state.qi] === i ? ' on' : '');
+    b.innerHTML = '<span class="lt">' + LT[i] + '</span><span class="tx">' + o.t + '</span>';
+    b.onclick = function(){ choose(i); };
+    card.appendChild(b);
+  });
+  var backBtn = $('qBackBtn'), nextBtn = $('qNextBtn');
+  backBtn.textContent = state.qi === 0 ? (TESTS[state.test].gender ? '← 重选性别' : '← 返回选择') : '← 上一题';
+  var last = state.qi === n - 1;
+  nextBtn.textContent = last ? '查看我的结果 →' : '下一题 →';
+  nextBtn.disabled = state.ans[state.qi] < 0;
+  window.scrollTo(0,0);
+}
+function choose(i){
+  state.ans[state.qi] = i;
+  var opts = $('qcard').querySelectorAll('.opt');
+  for (var j = 0; j < opts.length; j++) opts[j].classList.toggle('on', j === i);
+  $('qNextBtn').disabled = false;
+  setTimeout(function(){
+    if (state.qi < state.qs.length - 1){ state.qi++; renderQ(); }
+    else { finish(); }
+  }, 230);
+}
+function nextQ(){
+  if (state.ans[state.qi] < 0){ toast('先选一个答案哦'); return; }
+  if (state.qi < state.qs.length - 1){ state.qi++; renderQ(); }
+  else finish();
+}
+function prevQ(){
+  if (state.qi === 0){
+    if (TESTS[state.test].gender) show('scrGender'); else showSelect();
+    return;
+  }
+  state.qi--; renderQ();
+}
+function quitQuiz(){
+  if (confirm('退出后本次答题不会保存，确定吗？')) showSelect();
+}
+
+/* ================= 计分 ================= */
+function compute(){
+  var t = TESTS[state.test], n = state.qs.length;
+  var scores = {}, dims = {};
+  t.order.forEach(function(k){ scores[k] = 0; });
+  t.dimOrder.forEach(function(d){ dims[d] = 0; });
+  state.ans.forEach(function(oi, qi){
+    var o = state.qs[qi].o[oi];
+    if (!o) return;
+    scores[o.a] = (scores[o.a] || 0) + 1;
+    var p = t.types[o.a].p;
+    for (var d in p) dims[d] += p[d];
+  });
+  var ranked = t.order.slice().sort(function(a, b){
+    var ta = 0, tb = 0;
+    for (var d in t.types[a].p) ta += t.types[a].p[d];
+    for (var d2 in t.types[b].p) tb += t.types[b].p[d2];
+    return (scores[b] - scores[a]) || (tb - ta);
+  });
+  var dimPct = {};
+  t.dimOrder.forEach(function(d){ dimPct[d] = Math.min(100, Math.round(dims[d] / (n * 3) * 100)); });
+  var total = 0;
+  t.dimOrder.forEach(function(d){ total += dims[d]; });
+  var maxTotal = n * 3 * t.dimOrder.length;
+  var score = Math.max(30, Math.round(total / maxTotal * 100));
+  var beat = Math.min(97, Math.round(score * t.beatRate + t.beatBase));
+  var dimSorted = t.dimOrder.slice().sort(function(a, b){ return dimPct[b] - dimPct[a]; });
+  return {
+    scores:scores, ranked:ranked, top:ranked[0], second:ranked[1], third:ranked[2],
+    dimPct:dimPct, dimSorted:dimSorted,
+    strong:dimSorted[0], weak:dimSorted[dimSorted.length - 1],
+    score:score, beat:beat, n:n
+  };
+}
+
+/* ================= 结果页 ================= */
+function finish(){
+  state.res = compute();
+
+  /* 离线兜底模式：本地记账 */
+  if (!online && curPwd && !state.used){
+    var u = loadUsage();
+    u[curPwd] = (u[curPwd] || 0) + 1;
+    saveUsage(u);
+    state.used = true;
+    serverLeft = Math.max(0, MAX_USES - u[curPwd]);
+  }
+
+  renderResult();
+  show('scrResult');
+  setTimeout(function(){
+    /* 维度条涨上去 */
+    document.querySelectorAll('#scrResult .dt i').forEach(function(el){
+      el.style.width = el.getAttribute('data-w') + '%';
+    });
+    /* 分数环从 0 填满 */
+    var rg = document.querySelector('#scrResult .ring circle.rg');
+    if (rg && rg.getAttribute('data-off')){
+      rg.style.strokeDashoffset = rg.getAttribute('data-off');
+    }
+    /* 区块依次浮现，做出"揭晓"的仪式感 */
+    var blocks = document.querySelectorAll(
+      '#scrResult .ringbox, #scrResult .dims, #scrResult .sec, ' +
+      '#scrResult .quote, #scrResult .tips, #scrResult .share, ' +
+      '#scrResult .row2, #scrResult .rfoot');
+    for (var bi = 0; bi < blocks.length; bi++){
+      blocks[bi].style.animationDelay = (0.05 + bi * 0.07).toFixed(2) + 's';
+    }
+  }, 60);
+
+  /* 在线模式：向服务端扣 1 次 */
+  if (online && curPwd && !state.used){
+    state.used = true;
+    sbRpc('pwd_consume', { p_pwd: curPwd, p_prefix: PREFIX }).then(function(d){
+      var tip = $('leftTip');
+      if (d && d.ok){
+        serverLeft = d.left;
+        if (tip) tip.textContent = '密码剩余次数：' + serverLeft + ' 次';
+      } else if (d && d.reason === 'used_up'){
+        serverLeft = 0;
+        if (tip) tip.textContent = '密码剩余次数：0 次（已用完，请联系发放者）';
+      }
+    }).catch(function(){
+      var tip = $('leftTip');
+      if (tip) tip.textContent = '次数扣除失败（网络问题），不影响本次结果';
+    });
+  }
+}
+function barHTML(k, v){
+  return '<div class="drow"><span class="dn">' + k + '</span>' +
+         '<span class="dt"><i data-w="' + v + '"></i></span>' +
+         '<span class="dv">' + v + '</span></div>';
+}
+function renderResult(){
+  var t = TESTS[state.test], r = state.res;
+  var T = t.types[r.top], T2 = t.types[r.second], T3 = t.types[r.third];
+  var left = (serverLeft === null ? '—' : serverLeft);
+  var tb = r.dimPct[r.strong], wb = r.dimPct[r.weak];
+  var html = '';
+  html += '<div class="brand"><i></i>' + t.short + '<i></i></div>';
+  html += '<div class="rhero"><span class="e">' + T.e + '</span><div class="nm">' + T.name + '</div><div class="tg">' + T.tag + '</div></div>';
+  var CIRC = 2 * Math.PI * 40;
+  var OFF  = CIRC * (1 - Math.max(0, Math.min(100, r.score)) / 100);
+  html += '<div class="ringbox">' +
+      '<div class="ring"><svg width="92" height="92" viewBox="0 0 92 92">' +
+        '<defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">' +
+          '<stop offset="0%" style="stop-color:var(--accent)"/>' +
+          '<stop offset="100%" style="stop-color:var(--accent2)"/>' +
+        '</linearGradient></defs>' +
+        '<circle cx="46" cy="46" r="40" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="7"/>' +
+        '<circle class="rg" cx="46" cy="46" r="40" fill="none" stroke="url(#rg)" stroke-width="7" ' +
+          'stroke-linecap="round" stroke-dasharray="' + CIRC.toFixed(1) + '" ' +
+          'stroke-dashoffset="' + CIRC.toFixed(1) + '" data-off="' + OFF.toFixed(1) + '"/>' +
+      '</svg><div class="num"><b>' + r.score + '</b><i>' + t.scoreUnit + '</i></div></div>' +
+      '<div class="ringinfo"><div class="t1">' + t.scoreLabel + '</div>' +
+      '<div class="t2">超过了 <b>' + r.beat + '%</b> 的参与者<br>参考样本 ' + t.sample + ' 人</div></div>' +
+    '</div>';
+  html += '<div class="dims">' + t.dimOrder.map(function(d){ return barHTML(t.dims[d].n, r.dimPct[d]); }).join('') + '</div>';
+  html += '<div class="sec"><h3>你的画像</h3><p>' + T.desc + '</p></div>';
+  html += '<div class="sec"><h3>别人眼中的你</h3><p>' + T.sec2 + '</p></div>';
+  html += '<div class="sec"><h3>' + t.strongTitle + '</h3><p>' + t.analysisIntro + '</p><p style="margin-top:10px">'
+        + '你最强的一项是 <b style="color:var(--accent2)">' + t.dims[r.strong].n + '（' + tb + '）</b>。' + t.dims[r.strong].hi + '</p>'
+        + '<p style="margin-top:10px">相对最弱的是 <b style="color:var(--accent2)">' + t.dims[r.weak].n + '（' + wb + '）</b>。' + t.dims[r.weak].lo + '</p></div>';
+  if (t.gender && state.gender){
+    html += '<div class="sec"><h3>' + t.genderTitle[state.gender] + '</h3><p>' + (state.gender === 'm' ? T.male : T.female) + '</p></div>';
+  }
+  html += '<div class="quote"><small>最 戳 你 的 一 句</small>' + T.sec3 + '</div>';
+  html += '<div class="tips"><b>' + t.tipTitle + '：</b>' + T.tip + '</div>';
+  html += '<div class="sec"><h3>你的类型构成</h3><p>主类型：' + T.e + ' ' + T.name + ' &nbsp;·&nbsp; 次类型：' + T2.e + ' ' + T2.name + ' &nbsp;·&nbsp; 第三：' + T3.e + ' ' + T3.name + '<br><br>你的结果不是单选题——你的主类型决定了别人对你的第一印象，次类型决定了熟悉之后你会露出来的那一面。</p></div>';
+
+  var shareText = '我用「' + t.short + '」测出来是【' + T.name + ' ' + T.e + '】——' + T.tag + '。' + t.scoreLabel + ' ' + r.score + ' 分。你也来测测自己是什么型～';
+  html += '<div class="share"><div class="t">📋 复制这段去分享</div><div class="x" id="shareTxt">' + shareText + '</div></div>';
+  html += '<div class="row2"><button class="btn small" onclick="copyShare()">📋 复制结果</button><button class="btn small" onclick="genCard()">🖼 生成图片</button></div>';
+  html += '<div class="row2"><button class="btn ghost small" onclick="again()">🔄 再测一次</button><button class="btn ghost small" onclick="showSelect()">🏠 返回首页</button></div>';
+  html += '<div class="rfoot">本次结果基于 ' + r.n + ' 道题目的维度计分生成，仅供娱乐与自我观察<br><span id="leftTip">密码剩余次数：' + left + ' 次</span></div>';
+
+  $('scrResult').innerHTML = html;
+}
+function again(){
+  if (serverLeft !== null && serverLeft <= 0){
+    toast('这个密码的 ' + serverMax + ' 次机会已经用完了');
+    return;
+  }
+  beginQuiz();
+}
+function copyShare(){
+  var el = $('shareTxt');
+  if (!el) return;
+  var txt = el.textContent;
+  var done = false;
+  try{
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.cssText = 'position:fixed;left:-9999px;top:0';
+    document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, txt.length);
+    done = document.execCommand('copy');
+    document.body.removeChild(ta);
+  }catch(e){}
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(function(){ toast('已复制，去分享吧 🎉'); },
+      function(){ toast(done ? '已复制 🎉' : '长按上方文字手动复制'); });
+  } else {
+    toast(done ? '已复制，去分享吧 🎉' : '长按上方文字手动复制');
+  }
+}
+
+/* ================= 生成结果图片（Canvas） ================= */
+var CARD_W = 750;
+var FONT = '"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Apple Color Emoji","Segoe UI Emoji",sans-serif';
+function rr(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+function wrapLines(ctx, text, maxW, font){
+  ctx.font = font;
+  var lines = [], cur = '';
+  for (var i = 0; i < text.length; i++){
+    var ch = text[i];
+    if (ch === '\n'){ lines.push(cur); cur = ''; continue; }
+    if (ctx.measureText(cur + ch).width > maxW && cur !== ''){ lines.push(cur); cur = ch; }
+    else cur += ch;
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+function hex2rgb(h){
+  h = h.replace('#','');
+  return [parseInt(h.substr(0,2),16), parseInt(h.substr(2,2),16), parseInt(h.substr(4,2),16)];
+}
+function buildCardData(){
+  var t = TESTS[state.test], r = state.res, T = t.types[r.top];
+  var dims = t.dimOrder.map(function(d){ return { n:t.dims[d].n, v:r.dimPct[d] }; });
+  var secs = [
+    { h:'你的画像', p:T.desc },
+    { h:'别人眼中的你', p:T.sec2 },
+    { h:t.strongTitle, p:'最强：' + t.dims[r.strong].n + ' ' + r.dimPct[r.strong] + '。' + t.dims[r.strong].hi }
+  ];
+  if (t.gender && state.gender){
+    secs.push({ h:t.genderTitle[state.gender], p: state.gender === 'm' ? T.male : T.female });
+  }
+  var accent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#E4577C';
+  var accent2 = getComputedStyle(document.body).getPropertyValue('--accent2').trim() || '#FF9DB6';
+  var bg1 = getComputedStyle(document.body).getPropertyValue('--bg1').trim() || '#0C0810';
+  var bg2 = getComputedStyle(document.body).getPropertyValue('--bg2').trim() || '#1B1020';
+  return {
+    accent:accent, accent2:accent2, bg1:bg1, bg2:bg2,
+    eyebrow:'测 测 研 究 所',
+    title:t.cardTitle,
+    emoji:T.e, name:T.name, tag:T.tag,
+    scoreLabel:t.scoreLabel, score:r.score, beat:r.beat, sample:t.sample,
+    dims:dims, secs:secs, quote:T.sec3, footer:t.footer,
+    subtitle:'四维人格测评 · 结果仅供娱乐与自我观察'
+  };
+}
+function drawCard(ctx, d, dry){
+  var W = CARD_W, pad = 52, x = pad, maxW = W - pad * 2, y = 0;
+  var c1 = hex2rgb(d.bg2), c2 = hex2rgb(d.bg1);
+  if (!dry){
+    var g = ctx.createLinearGradient(0, 0, W * .4, 1800);
+    g.addColorStop(0, 'rgb(' + c1.join(',') + ')');
+    g.addColorStop(.55, 'rgb(' + c2.join(',') + ')');
+    g.addColorStop(1, 'rgb(' + c1.join(',') + ')');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, ctx.canvas.height);
+    var rg = ctx.createRadialGradient(W * .5, -60, 20, W * .5, -60, 520);
+    rg.addColorStop(0, 'rgba(' + hex2rgb(d.accent).join(',') + ',.42)');
+    rg.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = rg; ctx.fillRect(0, 0, W, 620);
+  }
+  y = 76;
+  ctx.textAlign = 'center';
+  var eFont = 'bold 34px ' + FONT, nFont = 'bold 66px ' + FONT, tFont = 'bold 32px ' + FONT;
+  var bFont = '30px ' + FONT, sFont = '25px ' + FONT, hFont = 'bold 27px ' + FONT;
+  var qFont = 'bold 34px ' + FONT;
+
+  ctx.font = sFont; ctx.fillStyle = 'rgba(255,255,255,.5)';
+  ctx.fillText(d.eyebrow.split('').join(' '), W / 2, y); y += 44;
+  ctx.font = 'bold 40px ' + FONT; ctx.fillStyle = 'rgba(255,255,255,.92)';
+  ctx.fillText(d.title, W / 2, y); y += 60;
+
+  ctx.font = eFont; y += 96; ctx.fillText(d.emoji, W / 2, y); y += 30;
+  ctx.font = nFont; ctx.fillStyle = '#fff'; y += 44; ctx.fillText(d.name, W / 2, y); y += 52;
+  ctx.font = tFont; ctx.fillStyle = d.accent2;
+  var tagLines = wrapLines(ctx, d.tag, maxW - 40, tFont);
+  tagLines.forEach(function(l){ y += 42; ctx.fillText(l, W / 2, y); });
+  y += 34;
+
+  /* 分数条 */
+  var scorC = 'rgba(255,255,255,.07)';
+  var bx = pad, bw = maxW, bh = 116;
+  if (!dry){ ctx.fillStyle = scorC; rr(ctx, bx, y, bw, bh, 26); ctx.fill(); 
+    ctx.strokeStyle = 'rgba(255,255,255,.12)'; ctx.lineWidth = 2; rr(ctx, bx, y, bw, bh, 26); ctx.stroke(); }
+  ctx.textAlign = 'center';
+  ctx.font = 'bold 62px ' + FONT; ctx.fillStyle = d.accent2;
+  if (!dry) ctx.fillText(String(d.score), W / 2, y + 74);
+  ctx.font = 'bold 24px ' + FONT; ctx.fillStyle = 'rgba(255,255,255,.85)';
+  if (!dry){
+    ctx.fillText(d.scoreLabel + ' · 超过 ' + d.beat + '% 的参与者', W / 2, y + 86);
+    ctx.font = '21px ' + FONT; ctx.fillStyle = 'rgba(255,255,255,.42)';
+    ctx.fillText('样本 ' + d.sample + ' 人', W / 2, y + 112);
+  }
+  y += bh + 44;
+
+  /* 维度 */
+  ctx.textAlign = 'left';
+  d.dims.forEach(function(dim){
+    ctx.font = hFont; ctx.fillStyle = 'rgba(255,255,255,.86)';
+    if (!dry) ctx.fillText(dim.n, pad, y + 6);
+    ctx.font = 'bold 24px ' + FONT; ctx.textAlign = 'right'; ctx.fillStyle = d.accent2;
+    if (!dry) ctx.fillText(String(dim.v), W - pad, y + 6);
+    ctx.textAlign = 'left';
+    var trackY = y + 20, tw = maxW;
+    if (!dry){
+      ctx.fillStyle = 'rgba(255,255,255,.1)'; rr(ctx, pad, trackY, tw, 14, 7); ctx.fill();
+      var gg = ctx.createLinearGradient(pad, 0, pad + tw, 0);
+      gg.addColorStop(0, d.accent); gg.addColorStop(1, d.accent2);
+      ctx.fillStyle = gg;
+      rr(ctx, pad, trackY, Math.max(14, tw * dim.v / 100), 14, 7); ctx.fill();
+    }
+    y += 54;
+  });
+  y += 22;
+
+  /* 内容区块 */
+  ctx.textAlign = 'left';
+  d.secs.forEach(function(s){
+    ctx.font = hFont; ctx.fillStyle = d.accent2;
+    y += 32;
+    if (!dry){
+      ctx.fillRect(pad, y - 21, 6, 26);
+      ctx.fillText(s.h, pad + 18, y);
+    }
+    y += 16;
+    ctx.font = bFont; ctx.fillStyle = 'rgba(255,255,255,.86)';
+    var lines = wrapLines(ctx, s.p, maxW, bFont);
+    lines.forEach(function(l){ y += 44; if (!dry) ctx.fillText(l, pad, y); });
+    y += 30;
+  });
+
+  /* 戳心话 */
+  y += 10;
+  var qLines = wrapLines(ctx, d.quote, maxW - 60, qFont);
+  var qh = qLines.length * 48 + 76;
+  if (!dry){
+    ctx.fillStyle = 'rgba(255,255,255,.08)'; rr(ctx, pad, y, maxW, qh, 24); ctx.fill();
+    ctx.fillStyle = d.accent; rr(ctx, pad, y, 7, qh, 4); ctx.fill();
+    ctx.font = '20px ' + FONT; ctx.fillStyle = 'rgba(255,255,255,.45)';
+    ctx.fillText('最 戳 你 的 一 句', pad + 34, y + 42);
+    ctx.font = qFont; ctx.fillStyle = '#fff';
+    var qy = y + 42 + 4;
+    qLines.forEach(function(l){ qy += 48; ctx.fillText(l, pad + 34, qy); });
+  }
+  y += qh + 56;
+
+  /* 页脚 */
+  ctx.textAlign = 'center';
+  ctx.font = 'bold 26px ' + FONT; ctx.fillStyle = 'rgba(255,255,255,.75)';
+  if (!dry) ctx.fillText(d.footer, W / 2, y); y += 40;
+  ctx.font = '21px ' + FONT; ctx.fillStyle = 'rgba(255,255,255,.4)';
+  if (!dry) ctx.fillText(d.subtitle, W / 2, y);
+  y += 66;
+
+  return y;
+}
+function genCard(){
+  var d = buildCardData();
+  var cv = document.createElement('canvas');
+  cv.width = CARD_W; cv.height = 1000;
+  var ctx = cv.getContext('2d');
+  var h = drawCard(ctx, d, true);
+  cv.height = Math.ceil(h + 40);
+  ctx = cv.getContext('2d');
+  drawCard(ctx, d, false);
+  try{
+    var url = cv.toDataURL('image/png');
+    $('cardImg').src = url;
+    $('cardImg').setAttribute('data-name', d.title + '_' + d.name + '.png');
+    $('imgModal').classList.remove('hide');
+  }catch(e){
+    toast('图片生成失败，请截图保存');
+  }
+}
+function closeModal(){ $('imgModal').classList.add('hide'); }
+function downloadImg(){
+  var img = $('cardImg');
+  if (!img.src) return;
+  var a = document.createElement('a');
+  a.href = img.src;
+  a.download = img.getAttribute('data-name') || 'result.png';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  toast('已尝试下载 · iPhone 请用"长按图片→存储图像"');
+}
+
+/* ================= 初始化 ================= */
+(function init(){
+  $('admMax').textContent = MAX_USES;
+
+  if (!sbReady()){
+    showGate();
+    $('gw').innerHTML = '⚠️ 网站还没配置后端<br>请在 index.html 里填好 SB_URL 和 SB_KEY';
+  } else {
+    var p = '';
+    try{ p = sessionStorage.getItem(SS_KEY) || ''; }catch(e){}
+    if (p){
+      sbRpc('pwd_check', { p_pwd: p, p_prefix: PREFIX }).then(function(d){
+        if (d && d.ok){
+          curPwd = p;
+          online = true;
+          serverLeft = d.left;
+          serverMax = d.max || MAX_USES;
+          showSelect();
+        } else {
+          showGate();
+        }
+      }).catch(function(){ showGate(); });
+    } else {
+      showGate();
+    }
+  }
+
+  $('pwInput').addEventListener('keydown', function(e){ if (e.key === 'Enter') tryEnter(); });
+  $('enterBtn').addEventListener('click', tryEnter);
+  $('eyeBtn').addEventListener('click', function(){
+    var i = $('pwInput');
+    i.type = i.type === 'password' ? 'text' : 'password';
+  });
+  $('imgModal').addEventListener('click', function(e){ if (e.target.id === 'imgModal') closeModal(); });
+  document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
+})();
+</script>
+</body>
+</html>

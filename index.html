@@ -38,6 +38,9 @@ h1{font-size:27px;font-weight:800;letter-spacing:.5px;margin-top:16px;line-heigh
 .card .tags span{font-size:11px;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.07);color:#A99CB0}
 .card .go{margin-top:15px;font-size:13.5px;font-weight:700;color:#FF9DB6;display:flex;align-items:center;gap:5px}
 .card.gold .go{color:#F5DC9C}
+.card.ink{border-color:rgba(201,162,39,.3);
+  box-shadow:0 18px 46px rgba(0,0,0,.45), inset 0 1px 0 rgba(242,224,176,.1)}
+.card.ink .go{color:#F2E0B0}
 .note{margin-top:22px;padding:16px;border-radius:16px;background:rgba(255,255,255,.04);
   border:1px dashed rgba(255,255,255,.14);font-size:12.5px;line-height:1.85;color:#A99CB0}
 .note b{color:#F5EFF4}
@@ -50,9 +53,20 @@ h1{font-size:27px;font-weight:800;letter-spacing:.5px;margin-top:16px;line-heigh
 
   <div class="hero">
     <div class="logo">🔮</div>
-    <h1>两个测评<br>藏在一句密码后面</h1>
+    <h1>三个测评<br>藏在一句密码后面</h1>
     <p class="sub">请选择你要做的测评<br>密码由发放者提供，每个密码可测 3 次</p>
   </div>
+
+  <a class="card ink" href="dynasty/">
+    <div class="dot" style="background:#C9A227"></div>
+    <div class="hd">
+      <div class="e">🏯</div>
+      <div><div class="tt">你的朝代气质是什么</div><div class="st">20 题 · 约 4 分钟 · 12 种朝代人格</div></div>
+    </div>
+    <div class="dd">同样是人，为什么有人沉稳如汉、有人盛放如唐、有人清淡如宋？这个测评拆的是你身上那股"隔着千年也认得出来"的气——不是性格标签，而是你处理事情时的底色。</div>
+    <div class="tags"><span>定力</span><span>热度</span><span>雅致</span><span>锋芒</span></div>
+    <div class="go">开始测试 →</div>
+  </a>
 
   <a class="card" href="tension/">
     <div class="dot" style="background:#E4577C"></div>
@@ -77,8 +91,8 @@ h1{font-size:27px;font-weight:800;letter-spacing:.5px;margin-top:16px;line-heigh
   </a>
 
   <div class="note">
-    <b>怎么用：</b>点开任一个测评 → 输入密码 → 开始答题。做完可以生成图片保存到相册。<br>
-    <b>次数：</b>每个密码共 3 次机会，两个测评通用，做完一次扣一次。
+    <b>怎么用：</b>点开你要做的测评 → 输入密码 → 开始答题。做完可以生成图片保存到相册。<br>
+    <b>次数：</b>每个密码只对应它那一个测评，各有 3 次机会。三个测评的密码互不通用。
   </div>
 
   <div class="foot">

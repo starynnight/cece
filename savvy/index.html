@@ -320,6 +320,52 @@ body[data-theme="savvy"]{--accent:#E8A32B;--accent2:#FFE3A6;--glow:rgba(232,163,
 .ring circle.rg{transition:stroke-dashoffset 1.25s cubic-bezier(.25,.9,.3,1)}
 .ringbox{margin-top:24px}
 .rhero{padding:30px 0 2px}
+
+/* ==================== 朝代气质·专属主题：墨底描金 ==================== */
+body[data-theme="dynasty"]{
+  --accent:#C9A227;
+  --accent2:#F2E0B0;
+  --glow:rgba(201,162,39,.42);
+  --bg1:#07090D;
+  --bg2:#141A26;
+  --txt:#F3EFE6;
+  --dim:#A79E8C;
+  --card:rgba(255,255,255,.05);
+  --line:rgba(201,162,39,.2);
+}
+body[data-theme="dynasty"]::before{background:radial-gradient(circle,rgba(192,57,43,.44),transparent 68%)}
+body[data-theme="dynasty"]::after{background:radial-gradient(circle,rgba(201,162,39,.36),transparent 68%)}
+
+/* 描金细边卡片 */
+body[data-theme="dynasty"] .card,
+body[data-theme="dynasty"] .panel,
+body[data-theme="dynasty"] .qcard,
+body[data-theme="dynasty"] .tcard{
+  border-color:rgba(201,162,39,.3);
+  box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(242,224,176,.14),
+             inset 0 0 0 1px rgba(201,162,39,.07);
+}
+/* 题卡顶部一道金线 */
+body[data-theme="dynasty"] .qcard{position:relative}
+body[data-theme="dynasty"] .qcard::before{content:"";position:absolute;left:22px;right:22px;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.75}
+
+/* 小标题前的金色竖标 */
+body[data-theme="dynasty"] .sec h3::before{content:"";display:inline-block;width:3px;height:13px;
+  background:linear-gradient(180deg,var(--accent2),var(--accent));
+  margin-right:9px;vertical-align:-1px;border-radius:2px}
+/* 引用块左侧金线 */
+body[data-theme="dynasty"] .quote{border-left:2px solid var(--accent);padding-left:16px}
+/* 金石气：名字拉开字距 */
+body[data-theme="dynasty"] .rhero .nm{letter-spacing:3px}
+body[data-theme="dynasty"] .brand{letter-spacing:7px;color:var(--accent2)}
+body[data-theme="dynasty"] .proof{border-color:rgba(201,162,39,.3)}
+/* 主按钮：描金 */
+body[data-theme="dynasty"] .btn:not(.ghost){
+  background:linear-gradient(135deg,#E7C877,#B8860B);
+  box-shadow:0 8px 26px rgba(201,162,39,.34);
+  color:#2A1F05;
+}
 </style>
 </head>
 <body data-theme="savvy">
